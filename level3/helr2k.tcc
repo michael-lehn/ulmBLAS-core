@@ -1,21 +1,22 @@
-#ifndef ULMBLAS_LEVEL3_SYUR2K_TCC
-#define ULMBLAS_LEVEL3_SYUR2K_TCC 1
+#ifndef ULMBLAS_LEVEL3_HELR2K_TCC
+#define ULMBLAS_LEVEL3_HELR2K_TCC 1
 
+#include <ulmblas/auxiliary/conjugate.h>
 #include <ulmblas/config/blocksize.h>
 #include <ulmblas/auxiliary/memorypool.h>
-#include <ulmblas/level1extensions/truscal.h>
+#include <ulmblas/level1extensions/trlscal.h>
 #include <ulmblas/level3/mkernel/mgemm.h>
-#include <ulmblas/level3/mkernel/msyurk.h>
+#include <ulmblas/level3/mkernel/msylrk.h>
 #include <ulmblas/level3/ukernel/ugemm.h>
 #include <ulmblas/level3/pack/gepack.h>
-#include <ulmblas/level3/syur2k.h>
+#include <ulmblas/level3/helr2k.h>
 
 namespace ulmBLAS {
 
 template <typename IndexType, typename Alpha, typename TA, typename TB,
           typename Beta, typename TC>
 void
-syur2k(IndexType    n,
+helr2k(IndexType    n,
        IndexType    k,
        const Alpha  &alpha,
        const TA     *A,
@@ -49,14 +50,15 @@ syur2k(IndexType    n,
     }
 
     if (alpha==Alpha(0) || k==0) {
-        truscal(n, n, false, beta, C, incRowC, incColC);
+        trlscal(n, n, false, beta, C, incRowC, incColC);
+        for (IndexType i=0; i<n; ++i) {
+            C[i*(incRowC+incColC)] = std::real(C[i*(incRowC+incColC)]);
+        }
         return;
     }
 
     T     *A_ = memoryPool.allocate(MC*MC+MR);
     T     *B_ = memoryPool.allocate(MC*MC+NR);
-
-    Beta  beta_ = Beta(1);
 
     for (IndexType j=0; j<mb; ++j) {
         IndexType nc = (j!=mb-1 || mc_==0) ? MC : mc_;
@@ -65,11 +67,11 @@ syur2k(IndexType    n,
             IndexType kc    = (l!=kb-1 || kc_==0) ? MC   : kc_;
             Beta      beta_ = (l==0) ? beta : Beta(1);
 
-            gepack_B(kc, nc, false,
+            gepack_B(kc, nc, true,
                      &B[l*MC*incColA+j*MC*incRowA], incColA, incRowA,
                      B_);
 
-            for (IndexType i=0; i<=j; ++i) {
+            for (IndexType i=j; i<mb; ++i) {
                 IndexType mc = (i!=mb-1 || mc_==0) ? MC : mc_;
 
                 gepack_A(mc, kc, false,
@@ -77,19 +79,19 @@ syur2k(IndexType    n,
                          A_);
 
                 if (i==j) {
-                    msyurk(mc, nc, kc, alpha, A_, B_, beta_,
+                    msylrk(mc, nc, kc, alpha,
+                           A_, B_, beta_,
                            &C[i*MC*incRowC+j*MC*incColC],
                            incRowC, incColC);
                 } else {
-                    mgemm(mc, nc, kc, alpha, A_, B_, beta_,
+                    mgemm(mc, nc, kc, alpha,
+                          A_, B_, beta_,
                           &C[i*MC*incRowC+j*MC*incColC],
                           incRowC, incColC);
                 }
             }
         }
     }
-
-    beta_ = Beta(1);
 
     for (IndexType j=0; j<mb; ++j) {
         IndexType nc = (j!=mb-1 || mc_==0) ? MC : mc_;
@@ -97,11 +99,11 @@ syur2k(IndexType    n,
         for (IndexType l=0; l<kb; ++l) {
             IndexType kc    = (l!=kb-1 || kc_==0) ? MC   : kc_;
 
-            gepack_B(kc, nc, false,
+            gepack_B(kc, nc, true,
                      &A[l*MC*incColA+j*MC*incRowA], incColA, incRowA,
                      B_);
 
-            for (IndexType i=0; i<=j; ++i) {
+            for (IndexType i=j; i<mb; ++i) {
                 IndexType mc = (i!=mb-1 || mc_==0) ? MC : mc_;
 
                 gepack_A(mc, kc, false,
@@ -109,11 +111,13 @@ syur2k(IndexType    n,
                          A_);
 
                 if (i==j) {
-                    msyurk(mc, nc, kc, alpha, A_, B_, beta_,
+                    msylrk(mc, nc, kc, conjugate(alpha),
+                           A_, B_, Beta(1),
                            &C[i*MC*incRowC+j*MC*incColC],
                            incRowC, incColC);
                 } else {
-                    mgemm(mc, nc, kc, alpha, A_, B_, beta_,
+                    mgemm(mc, nc, kc, conjugate(alpha),
+                          A_, B_, Beta(1),
                           &C[i*MC*incRowC+j*MC*incColC],
                           incRowC, incColC);
                 }
@@ -121,11 +125,14 @@ syur2k(IndexType    n,
         }
     }
 
+    for (IndexType i=0; i<n; ++i) {
+        C[i*(incRowC+incColC)] = std::real(C[i*(incRowC+incColC)]);
+    }
+
     memoryPool.release(A_);
     memoryPool.release(B_);
-
 }
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL3_SYUR2K_TCC
+#endif // ULMBLAS_LEVEL3_HELR2K_TCC

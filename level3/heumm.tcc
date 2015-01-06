@@ -1,21 +1,21 @@
-#ifndef ULMBLAS_LEVEL3_SYLMM_TCC
-#define ULMBLAS_LEVEL3_SYLMM_TCC 1
+#ifndef ULMBLAS_LEVEL3_HEUMM_TCC
+#define ULMBLAS_LEVEL3_HEUMM_TCC 1
 
 #include <ulmblas/config/blocksize.h>
 #include <ulmblas/auxiliary/memorypool.h>
 #include <ulmblas/level1extensions/gescal.h>
 #include <ulmblas/level3/mkernel/mgemm.h>
-#include <ulmblas/level3/ukernel/ugemm.h>
 #include <ulmblas/level3/pack/gepack.h>
-#include <ulmblas/level3/pack/sylpack.h>
-#include <ulmblas/level3/sylmm.h>
+#include <ulmblas/level3/pack/heupack.h>
+#include <ulmblas/level3/heumm.h>
+
 
 namespace ulmBLAS {
 
 template <typename IndexType, typename Alpha, typename TA, typename TB,
           typename Beta, typename TC>
 void
-sylmm(IndexType    m,
+heumm(IndexType    m,
       IndexType    n,
       const Alpha  &alpha,
       const TA     *A,
@@ -71,16 +71,16 @@ sylmm(IndexType    m,
             for (IndexType i=0; i<mb; ++i) {
                 IndexType mc = (i!=mb-1 || mc_==0) ? MC : mc_;
 
-                if (i>l) {
+                if (i<l) {
                     gepack_A(mc, kc, false,
                              &A[i*MC*incRowA+l*MC*incColA], incRowA, incColA,
                              A_);
-                } else if (i<l) {
-                    gepack_A(mc, kc, false,
+                } else if (i>l) {
+                    gepack_A(mc, kc, true,
                              &A[l*MC*incRowA+i*MC*incColA], incColA, incRowA,
                              A_);
                 } else {
-                    sylpack(mc,
+                    heupack(mc,
                             &A[i*MC*incRowA+i*MC*incColA], incRowA, incColA,
                             A_);
                 }
@@ -98,4 +98,4 @@ sylmm(IndexType    m,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL3_SYLMM_TCC
+#endif // ULMBLAS_LEVEL3_HEUMM_TCC
