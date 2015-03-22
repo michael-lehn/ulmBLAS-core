@@ -1,5 +1,5 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_DOTAXPY_H
-#define ULMBLAS_LEVEL1EXTENSIONS_DOTAXPY_H 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOTAXPY_H
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOTAXPY_H 1
 
 namespace ulmBLAS {
 
@@ -28,6 +28,6 @@ template <typename IndexType, typename Alpha, typename VX, typename VY,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_DOTAXPY_H 1
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOTAXPY_H 1
 
-#include <ulmblas/level1extensions/dotaxpy.tcc>
+#include <ulmblas/impl/level1extensions/dotaxpy.tcc>

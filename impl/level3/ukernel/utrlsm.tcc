@@ -1,21 +1,21 @@
-#ifndef ULMBLAS_LEVEL3_UKERNEL_UTRLSM_TCC
-#define ULMBLAS_LEVEL3_UKERNEL_UTRLSM_TCC 1
+#ifndef ULMBLAS_IMPL_LEVEL3_UKERNEL_UTRLSM_TCC
+#define ULMBLAS_IMPL_LEVEL3_UKERNEL_UTRLSM_TCC 1
 
-#include <ulmblas/config/simd.h>
-#include <ulmblas/level1/scal.h>
-#include <ulmblas/level1extensions/gecopy.h>
-#include <ulmblas/level3/ukernel/ugemm.h>
-#include <ulmblas/level3/ukernel/utrlsm.h>
+#include <ulmblas/impl/config/simd.h>
+#include <ulmblas/impl/level1/scal.h>
+#include <ulmblas/impl/level1extensions/gecopy.h>
+#include <ulmblas/impl/level3/ukernel/ugemm.h>
+#include <ulmblas/impl/level3/ukernel/utrlsm.h>
 
 //
 //  Selected optimized micro kernel
 //
 #if defined(USE_SSE)
 #   define  SELECT_UTRLSM_KERNEL    sse
-#   include <ulmblas/level3/ukernel/sse/utrlsm.h>
+#   include <ulmblas/impl/level3/ukernel/sse/utrlsm.h>
 #else
 #   define  SELECT_UTRLSM_KERNEL    ref
-#   include <ulmblas/level3/ukernel/ref/utrlsm.h>
+#   include <ulmblas/impl/level3/ukernel/ref/utrlsm.h>
 #endif
 
 
@@ -85,4 +85,4 @@ utrlsm(const T     *A,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL3_UKERNEL_UTRLSM_TCC
+#endif // ULMBLAS_IMPL_LEVEL3_UKERNEL_UTRLSM_TCC

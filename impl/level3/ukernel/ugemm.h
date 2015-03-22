@@ -1,15 +1,15 @@
-#ifndef ULMBLAS_LEVEL3_UKERNEL_UGEMM_H
-#define ULMBLAS_LEVEL3_UKERNEL_UGEMM_H 1
+#ifndef ULMBLAS_IMPL_LEVEL3_UKERNEL_UGEMM_H
+#define ULMBLAS_IMPL_LEVEL3_UKERNEL_UGEMM_H 1
 
 //
 //  Selected optimized micro kernel
 //
 #if defined(USE_SSE)
 #   define  SELECT_UGEMM_KERNEL     sse
-#   include <ulmblas/level3/ukernel/sse/ugemm.h>
+#   include <ulmblas/impl/level3/ukernel/sse/ugemm.h>
 #else
 #   define  SELECT_UGEMM_KERNEL     ref
-#   include <ulmblas/level3/ukernel/ref/ugemm.h>
+#   include <ulmblas/impl/level3/ukernel/ref/ugemm.h>
 #endif
 
 namespace ulmBLAS {
@@ -74,6 +74,6 @@ template <typename IndexType, typename T>
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL3_UKERNEL_UGEMM_H
+#endif // ULMBLAS_IMPL_LEVEL3_UKERNEL_UGEMM_H
 
-#include <ulmblas/level3/ukernel/ugemm.tcc>
+#include <ulmblas/impl/level3/ukernel/ugemm.tcc>

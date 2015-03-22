@@ -1,5 +1,5 @@
-#ifndef ULMBLAS_LEVEL3_UKERNEL_UTRLSM_H
-#define ULMBLAS_LEVEL3_UKERNEL_UTRLSM_H 1
+#ifndef ULMBLAS_IMPL_LEVEL3_UKERNEL_UTRLSM_H
+#define ULMBLAS_IMPL_LEVEL3_UKERNEL_UTRLSM_H 1
 
 namespace ulmBLAS {
 
@@ -41,6 +41,6 @@ template <typename IndexType, typename T>
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL3_UKERNEL_UTRLSM_H
+#endif // ULMBLAS_IMPL_LEVEL3_UKERNEL_UTRLSM_H
 
-#include <ulmblas/level3/ukernel/utrlsm.tcc>
+#include <ulmblas/impl/level3/ukernel/utrlsm.tcc>

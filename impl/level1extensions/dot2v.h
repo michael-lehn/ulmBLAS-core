@@ -1,5 +1,5 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_DOT2V_H
-#define ULMBLAS_LEVEL1EXTENSIONS_DOT2V_H 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOT2V_H
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOT2V_H 1
 
 namespace ulmBLAS {
 
@@ -18,6 +18,6 @@ template <typename IndexType, typename VX0, typename VX1, typename VY,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_DOT2V_H
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOT2V_H
 
-#include <ulmblas/level1extensions/dot2v.tcc>
+#include <ulmblas/impl/level1extensions/dot2v.tcc>

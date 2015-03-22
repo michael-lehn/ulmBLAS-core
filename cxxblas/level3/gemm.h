@@ -1,27 +1,25 @@
-#ifndef CXXBLAS_LEVEL3_GEMM_H
-#define CXXBLAS_LEVEL3_GEMM_H 1
-
-#include <ulmblas/ulmblas.h>
+#ifndef ULMBLAS_CXXBLAS_LEVEL3_GEMM_H
+#define ULMBLAS_CXXBLAS_LEVEL3_GEMM_H 1
 
 namespace cxxblas {
 
 template <typename IndexType, typename Alpha, typename TA, typename TB,
           typename Beta, typename TC>
     void
-    gemm(bool         transA,
-         bool         transB,
-         IndexType    m,
+    gemm(IndexType    m,
          IndexType    n,
          IndexType    k,
          const Alpha  &alpha,
+         bool         transA,
          bool         conjA,
          const TA     *A,
-         IndexType    incRowA,
-         IndexType    incColA,
+         IndexType    incRowA_,
+         IndexType    incColA_,
+         bool         transB,
          bool         conjB,
          const TB     *B,
-         IndexType    incRowB,
-         IndexType    incColB,
+         IndexType    incRowB_,
+         IndexType    incColB_,
          const Beta   &beta,
          TC           *C,
          IndexType    incRowC,
@@ -29,6 +27,6 @@ template <typename IndexType, typename Alpha, typename TA, typename TB,
 
 } // namespace cxxblas
 
-#endif // CXXBLAS_LEVEL3_GEMM_H
+#endif // ULMBLAS_CXXBLAS_LEVEL3_GEMM_H
 
-#include <cxxblas/level3/gemm.tcc>
+#include <ulmblas/cxxblas/level3/gemm.tcc>

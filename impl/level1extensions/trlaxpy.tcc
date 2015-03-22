@@ -1,9 +1,9 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_TRLAXPY_TCC
-#define ULMBLAS_LEVEL1EXTENSIONS_TRLAXPY_TCC 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_TRLAXPY_TCC
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_TRLAXPY_TCC 1
 
 #include <algorithm>
-#include <ulmblas/level1/axpy.h>
-#include <ulmblas/level1extensions/trlaxpy.h>
+#include <ulmblas/impl/level1/axpy.h>
+#include <ulmblas/impl/level1extensions/trlaxpy.h>
 
 namespace ulmBLAS {
 
@@ -58,4 +58,4 @@ trlaxpy(IndexType    m,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_TRLAXPY_TCC 1
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_TRLAXPY_TCC 1

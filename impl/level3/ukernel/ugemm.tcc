@@ -1,11 +1,11 @@
-#ifndef ULMBLAS_LEVEL3_UKERNEL_UGEMM_TCC
-#define ULMBLAS_LEVEL3_UKERNEL_UGEMM_TCC 1
+#ifndef ULMBLAS_IMPL_LEVEL3_UKERNEL_UGEMM_TCC
+#define ULMBLAS_IMPL_LEVEL3_UKERNEL_UGEMM_TCC 1
 
-#include <ulmblas/auxiliary/printmatrix.h>
-#include <ulmblas/config/simd.h>
-#include <ulmblas/level1extensions/geaxpy.h>
-#include <ulmblas/level1extensions/gescal.h>
-#include <ulmblas/level3/ukernel/ugemm.h>
+#include <ulmblas/impl/auxiliary/printmatrix.h>
+#include <ulmblas/impl/config/simd.h>
+#include <ulmblas/impl/level1extensions/geaxpy.h>
+#include <ulmblas/impl/level1extensions/gescal.h>
+#include <ulmblas/impl/level3/ukernel/ugemm.h>
 
 namespace ulmBLAS {
 
@@ -34,7 +34,7 @@ ugemm(IndexType    mr,
 
     ugemm(kc, alpha, A, B, T(0), C_, IndexType(1), MR, nextA, nextB);
     gescal(mr, nr, beta, C, incRowC, incColC);
-    geaxpy(mr, nr, Beta(1), C_, IndexType(1), MR, C, incRowC, incColC);
+    geaxpy(mr, nr, T(1), C_, IndexType(1), MR, C, incRowC, incColC);
 }
 
 //
@@ -82,4 +82,4 @@ ugemm(IndexType   kc,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL3_UKERNEL_UGEMM_TCC
+#endif // ULMBLAS_IMPL_LEVEL3_UKERNEL_UGEMM_TCC

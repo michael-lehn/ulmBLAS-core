@@ -1,8 +1,8 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_DOTXF_TCC
-#define ULMBLAS_LEVEL1EXTENSIONS_DOTXF_TCC 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOTXF_TCC
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOTXF_TCC 1
 
-#include <ulmblas/level1extensions/dotxf.h>
-#include <ulmblas/level1extensions/kernel/dotxf.h>
+#include <ulmblas/impl/level1extensions/dotxf.h>
+#include <ulmblas/impl/level1extensions/kernel/dotxf.h>
 
 namespace ulmBLAS {
 
@@ -38,4 +38,4 @@ dotcxf(IndexType      n,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_DOTXF_TCC 1
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOTXF_TCC 1

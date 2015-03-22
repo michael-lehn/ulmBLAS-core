@@ -1,9 +1,9 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_GECOPY_TCC
-#define ULMBLAS_LEVEL1EXTENSIONS_GECOPY_TCC 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_GECOPY_TCC
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_GECOPY_TCC 1
 
-#include <ulmblas/auxiliary/conjugate.h>
-#include <ulmblas/level1/copy.h>
-#include <ulmblas/level1extensions/gecopy.h>
+#include <ulmblas/impl/auxiliary/conjugate.h>
+#include <ulmblas/impl/level1/copy.h>
+#include <ulmblas/impl/level1extensions/gecopy.h>
 
 namespace ulmBLAS {
 
@@ -59,4 +59,4 @@ gecopy(IndexType      m,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_GECOPY_TCC 1
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_GECOPY_TCC 1

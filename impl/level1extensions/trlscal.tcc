@@ -1,9 +1,9 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_TRLSCAL_TCC
-#define ULMBLAS_LEVEL1EXTENSIONS_TRLSCAL_TCC 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_TRLSCAL_TCC
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_TRLSCAL_TCC 1
 
 #include <algorithm>
-#include <ulmblas/level1/scal.h>
-#include <ulmblas/level1extensions/trlscal.h>
+#include <ulmblas/impl/level1/scal.h>
+#include <ulmblas/impl/level1extensions/trlscal.h>
 
 namespace ulmBLAS {
 
@@ -49,5 +49,5 @@ trlscal(IndexType    m,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_TRLSCAL_TCC 1
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_TRLSCAL_TCC 1
 

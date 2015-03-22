@@ -1,8 +1,8 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_AXPY2V_TCC
-#define ULMBLAS_LEVEL1EXTENSIONS_AXPY2V_TCC 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_AXPY2V_TCC
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_AXPY2V_TCC 1
 
-#include <ulmblas/level1extensions/axpy2v.h>
-#include <ulmblas/level1extensions/kernel/axpy2v.h>
+#include <ulmblas/impl/level1extensions/axpy2v.h>
+#include <ulmblas/impl/level1extensions/kernel/axpy2v.h>
 
 namespace ulmBLAS {
 
@@ -26,4 +26,4 @@ axpy2v(IndexType      n,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_AXPY2V_TCC 1
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_AXPY2V_TCC 1

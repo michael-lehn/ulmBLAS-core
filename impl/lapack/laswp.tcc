@@ -1,11 +1,11 @@
-#ifndef ULMBLAS_LAPACK_LASWP_TCC
-#define ULMBLAS_LAPACK_LASWP_TCC 1
+#ifndef ULMBLAS_IMPL_LAPACK_LASWP_TCC
+#define ULMBLAS_IMPL_LAPACK_LASWP_TCC 1
 
 #include <iostream>
 
 #include <algorithm>
-#include <ulmblas/lapack/laswp.h>
-#include <ulmblas/level1/swap.h>
+#include <ulmblas/impl/lapack/laswp.h>
+#include <ulmblas/impl/level1/swap.h>
 
 namespace ulmBLAS {
 
@@ -56,4 +56,4 @@ laswp(IndexType    n,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LAPACK_LASWP_TCC
+#endif // ULMBLAS_IMPL_LAPACK_LASWP_TCC

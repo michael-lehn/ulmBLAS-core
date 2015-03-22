@@ -1,9 +1,9 @@
-#ifndef ULMBLAS_LAPACK_LAENV_TCC
-#define ULMBLAS_LAPACK_LAENV_TCC 1
+#ifndef ULMBLAS_IMPL_LAPACK_LAENV_TCC
+#define ULMBLAS_IMPL_LAPACK_LAENV_TCC 1
 
 #include <cassert>
 #include <cstring>
-#include <ulmblas/lapack/laenv.h>
+#include <ulmblas/impl/lapack/laenv.h>
 
 namespace ulmBLAS {
 
@@ -74,4 +74,4 @@ laenv(long        spec,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LAPACK_LAENV_TCC
+#endif // ULMBLAS_IMPL_LAPACK_LAENV_TCC

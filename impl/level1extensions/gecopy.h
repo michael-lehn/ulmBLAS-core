@@ -1,5 +1,5 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_GECOPY_H
-#define ULMBLAS_LEVEL1EXTENSIONS_GECOPY_H 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_GECOPY_H
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_GECOPY_H 1
 
 namespace ulmBLAS {
 
@@ -29,6 +29,6 @@ template <typename IndexType, typename MX, typename MY>
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_GECOPY_H 1
+#include <ulmblas/impl/level1extensions/gecopy.tcc>
 
-#include <ulmblas/level1extensions/gecopy.tcc>
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_GECOPY_H 1

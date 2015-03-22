@@ -1,8 +1,8 @@
-#ifndef ULMBLAS_LAPACK_SAFEMIN_TCC
-#define ULMBLAS_LAPACK_SAFEMIN_TCC 1
+#ifndef ULMBLAS_IMPL_LAPACK_SAFEMIN_TCC
+#define ULMBLAS_IMPL_LAPACK_SAFEMIN_TCC 1
 
 #include <limits>
-#include <ulmblas/lapack/safemin.h>
+#include <ulmblas/impl/lapack/safemin.h>
 
 namespace ulmBLAS {
 
@@ -27,4 +27,4 @@ safeMin()
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LAPACK_SAFEMIN_TCC
+#endif // ULMBLAS_IMPL_LAPACK_SAFEMIN_TCC

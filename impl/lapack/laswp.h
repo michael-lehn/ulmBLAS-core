@@ -1,5 +1,5 @@
-#ifndef ULMBLAS_LAPACK_LASWP_H
-#define ULMBLAS_LAPACK_LASWP_H 1
+#ifndef ULMBLAS_IMPL_LAPACK_LASWP_H
+#define ULMBLAS_IMPL_LAPACK_LASWP_H 1
 
 namespace ulmBLAS {
 
@@ -16,6 +16,6 @@ template <typename IndexType, typename T>
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LAPACK_LASWP_H
+#endif // ULMBLAS_IMPL_LAPACK_LASWP_H
 
-#include <ulmblas/lapack/laswp.tcc>
+#include <ulmblas/impl/lapack/laswp.tcc>

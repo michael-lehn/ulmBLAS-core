@@ -1,5 +1,5 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_TRLSCAL_H
-#define ULMBLAS_LEVEL1EXTENSIONS_TRLSCAL_H 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_TRLSCAL_H
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_TRLSCAL_H 1
 
 namespace ulmBLAS {
 
@@ -15,6 +15,6 @@ template <typename IndexType, typename Alpha, typename MA>
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_TRLSCAL_H 1
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_TRLSCAL_H 1
 
-#include <ulmblas/level1extensions/trlscal.tcc>
+#include <ulmblas/impl/level1extensions/trlscal.tcc>

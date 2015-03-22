@@ -1,5 +1,5 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_TRUSCAL_H
-#define ULMBLAS_LEVEL1EXTENSIONS_TRUSCAL_H 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_TRUSCAL_H
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_TRUSCAL_H 1
 
 namespace ulmBLAS {
 
@@ -15,7 +15,7 @@ truscal(IndexType    m,
 
 } // namespace ulmBLAS
 
-#include <ulmblas/level1extensions/truscal.tcc>
+#include <ulmblas/impl/level1extensions/truscal.tcc>
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_TRUSCAL_H 1
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_TRUSCAL_H 1
 

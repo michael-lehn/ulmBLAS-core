@@ -1,7 +1,7 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_AXPYF_H
-#define ULMBLAS_LEVEL1EXTENSIONS_AXPYF_H 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_AXPYF_H
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_AXPYF_H 1
 
-#include <ulmblas/level1extensions/kernel/axpyf.h>
+#include <ulmblas/impl/level1extensions/kernel/axpyf.h>
 
 namespace ulmBLAS {
 
@@ -33,6 +33,6 @@ template <typename IndexType, typename Alpha, typename VA, typename VX,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_AXPYF_H
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_AXPYF_H
 
-#include <ulmblas/level1extensions/axpyf.tcc>
+#include <ulmblas/impl/level1extensions/axpyf.tcc>

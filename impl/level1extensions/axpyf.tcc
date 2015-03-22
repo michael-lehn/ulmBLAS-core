@@ -1,8 +1,8 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_AXPYF_TCC
-#define ULMBLAS_LEVEL1EXTENSIONS_AXPYF_TCC 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_AXPYF_TCC
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_AXPYF_TCC 1
 
-#include <ulmblas/level1extensions/axpyf.h>
-#include <ulmblas/level1extensions/kernel/axpyf.h>
+#include <ulmblas/impl/level1extensions/axpyf.h>
+#include <ulmblas/impl/level1extensions/kernel/axpyf.h>
 
 namespace ulmBLAS {
 
@@ -43,4 +43,4 @@ acxpyf(IndexType      n,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_AXPYF_TCC
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_AXPYF_TCC

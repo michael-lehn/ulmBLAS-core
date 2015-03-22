@@ -1,8 +1,8 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_DOT2V_H
-#define ULMBLAS_LEVEL1EXTENSIONS_DOT2V_H 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOT2V_H
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOT2V_H 1
 
-#include <ulmblas/level1extensions/dot2v.h>
-#include <ulmblas/level1extensions/kernel/dot2v.h>
+#include <ulmblas/impl/level1extensions/dot2v.h>
+#include <ulmblas/impl/level1extensions/kernel/dot2v.h>
 
 namespace ulmBLAS {
 
@@ -25,4 +25,4 @@ dotu2v(IndexType      n,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_DOT2V_H
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOT2V_H

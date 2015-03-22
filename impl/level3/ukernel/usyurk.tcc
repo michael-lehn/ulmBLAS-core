@@ -1,10 +1,10 @@
-#ifndef ULMBLAS_LEVEL3_UKERNEL_USYURK_TCC
-#define ULMBLAS_LEVEL3_UKERNEL_USYURK_TCC 1
+#ifndef ULMBLAS_IMPL_LEVEL3_UKERNEL_USYURK_TCC
+#define ULMBLAS_IMPL_LEVEL3_UKERNEL_USYURK_TCC 1
 
-#include <ulmblas/level1extensions/truaxpy.h>
-#include <ulmblas/level1extensions/truscal.h>
-#include <ulmblas/level3/ukernel/ugemm.h>
-#include <ulmblas/level3/ukernel/usyurk.h>
+#include <ulmblas/impl/level1extensions/truaxpy.h>
+#include <ulmblas/impl/level1extensions/truscal.h>
+#include <ulmblas/impl/level3/ukernel/ugemm.h>
+#include <ulmblas/impl/level3/ukernel/usyurk.h>
 
 namespace ulmBLAS {
 
@@ -51,4 +51,4 @@ usyurk(IndexType    mr,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL3_UKERNEL_USYURK_TCC
+#endif // ULMBLAS_IMPL_LEVEL3_UKERNEL_USYURK_TCC

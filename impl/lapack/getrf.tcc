@@ -1,13 +1,13 @@
-#ifndef ULMBLAS_LAPACK_GETRF_TCC
-#define ULMBLAS_LAPACK_GETRF_TCC 1
+#ifndef ULMBLAS_IMPL_LAPACK_GETRF_TCC
+#define ULMBLAS_IMPL_LAPACK_GETRF_TCC 1
 
 #include <algorithm>
-#include <ulmblas/lapack/getrf.h>
-#include <ulmblas/lapack/getf2.h>
-#include <ulmblas/lapack/laenv.h>
-#include <ulmblas/lapack/laswp.h>
-#include <ulmblas/level3/gemm.h>
-#include <ulmblas/level3/trlsm.h>
+#include <ulmblas/impl/lapack/getrf.h>
+#include <ulmblas/impl/lapack/getf2.h>
+#include <ulmblas/impl/lapack/laenv.h>
+#include <ulmblas/impl/lapack/laswp.h>
+#include <ulmblas/impl/level3/gemm.h>
+#include <ulmblas/impl/level3/trlsm.h>
 
 namespace ulmBLAS {
 
@@ -76,4 +76,4 @@ getrf(IndexType    m,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LAPACK_GETRF_TCC
+#endif // ULMBLAS_IMPL_LAPACK_GETRF_TCC

@@ -1,12 +1,12 @@
-#ifndef ULMBLAS_LEVEL3_UKERNEL_USYLRK_TCC
-#define ULMBLAS_LEVEL3_UKERNEL_USYLRK_TCC 1
+#ifndef ULMBLAS_IMPL_LEVEL3_UKERNEL_USYLRK_TCC
+#define ULMBLAS_IMPL_LEVEL3_UKERNEL_USYLRK_TCC 1
 
-#include <ulmblas/auxiliary/printmatrix.h>
+#include <ulmblas/impl/auxiliary/printmatrix.h>
 
-#include <ulmblas/level1extensions/trlaxpy.h>
-#include <ulmblas/level1extensions/trlscal.h>
-#include <ulmblas/level3/ukernel/ugemm.h>
-#include <ulmblas/level3/ukernel/usylrk.h>
+#include <ulmblas/impl/level1extensions/trlaxpy.h>
+#include <ulmblas/impl/level1extensions/trlscal.h>
+#include <ulmblas/impl/level3/ukernel/ugemm.h>
+#include <ulmblas/impl/level3/ukernel/usylrk.h>
 
 namespace ulmBLAS {
 
@@ -53,4 +53,4 @@ usylrk(IndexType    mr,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL3_UKERNEL_USYLRK_TCC
+#endif // ULMBLAS_IMPL_LEVEL3_UKERNEL_USYLRK_TCC

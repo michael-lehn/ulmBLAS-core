@@ -1,7 +1,5 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_GESCAL_H
-#define ULMBLAS_LEVEL1EXTENSIONS_GESCAL_H 1
-
-#include <complex>
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_GESCAL_H
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_GESCAL_H 1
 
 namespace ulmBLAS {
 
@@ -16,6 +14,6 @@ template <typename IndexType, typename Alpha, typename MA>
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_GESCAL_H 1
+#include <ulmblas/impl/level1extensions/gescal.tcc>
 
-#include <ulmblas/level1extensions/gescal.tcc>
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_GESCAL_H 1

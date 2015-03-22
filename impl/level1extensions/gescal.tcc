@@ -1,8 +1,8 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_GESCAL_TCC
-#define ULMBLAS_LEVEL1EXTENSIONS_GESCAL_TCC 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_GESCAL_TCC
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_GESCAL_TCC 1
 
-#include <ulmblas/level1/scal.h>
-#include <ulmblas/level1extensions/gescal.h>
+#include <ulmblas/impl/level1/scal.h>
+#include <ulmblas/impl/level1extensions/gescal.h>
 
 namespace ulmBLAS {
 
@@ -40,4 +40,4 @@ gescal(IndexType    m,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_GESCAL_TCC 1
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_GESCAL_TCC 1

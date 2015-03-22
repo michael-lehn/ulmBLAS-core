@@ -1,5 +1,5 @@
-#ifndef ULMBLAS_LAPACK_GETF2_H
-#define ULMBLAS_LAPACK_GETF2_H 1
+#ifndef ULMBLAS_IMPL_LAPACK_GETF2_H
+#define ULMBLAS_IMPL_LAPACK_GETF2_H 1
 
 namespace ulmBLAS {
 
@@ -15,6 +15,6 @@ template <typename IndexType, typename T>
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LAPACK_GETF2_H
+#endif // ULMBLAS_IMPL_LAPACK_GETF2_H
 
-#include <ulmblas/lapack/getf2.tcc>
+#include <ulmblas/impl/lapack/getf2.tcc>

@@ -1,5 +1,5 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_DOTXF_H
-#define ULMBLAS_LEVEL1EXTENSIONS_DOTXF_H 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOTXF_H
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOTXF_H 1
 
 namespace ulmBLAS {
 
@@ -27,6 +27,6 @@ template <typename IndexType, typename TX, typename TY, typename Result>
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_DOTXF_H 1
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOTXF_H 1
 
-#include <ulmblas/level1extensions/dotxf.tcc>
+#include <ulmblas/impl/level1extensions/dotxf.tcc>

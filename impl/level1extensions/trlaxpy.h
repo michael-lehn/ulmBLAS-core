@@ -1,5 +1,5 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_TRLAXPY_H
-#define ULMBLAS_LEVEL1EXTENSIONS_TRLAXPY_H 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_TRLAXPY_H
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_TRLAXPY_H 1
 
 namespace ulmBLAS {
 
@@ -18,6 +18,6 @@ template <typename IndexType, typename Alpha, typename MX, typename MY>
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_TRLAXPY_H 1
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_TRLAXPY_H 1
 
-#include <ulmblas/level1extensions/trlaxpy.tcc>
+#include <ulmblas/impl/level1extensions/trlaxpy.tcc>

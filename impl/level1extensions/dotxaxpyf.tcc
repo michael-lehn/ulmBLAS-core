@@ -1,8 +1,8 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_DOTXAXPYF_TCC
-#define ULMBLAS_LEVEL1EXTENSIONS_DOTXAXPYF_TCC 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOTXAXPYF_TCC
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOTXAXPYF_TCC 1
 
-#include <ulmblas/level1extensions/dotxaxpyf.h>
-#include <ulmblas/level1extensions/kernel/dotxaxpyf.h>
+#include <ulmblas/impl/level1extensions/dotxaxpyf.h>
+#include <ulmblas/impl/level1extensions/kernel/dotxaxpyf.h>
 
 namespace ulmBLAS {
 
@@ -33,4 +33,4 @@ dotxaxpyf(IndexType      n,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_DOTXAXPYF_TCC 1
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOTXAXPYF_TCC 1

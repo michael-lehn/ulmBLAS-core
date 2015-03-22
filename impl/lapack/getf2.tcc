@@ -1,13 +1,13 @@
-#ifndef ULMBLAS_LAPACK_GETF2_TCC
-#define ULMBLAS_LAPACK_GETF2_TCC 1
+#ifndef ULMBLAS_IMPL_LAPACK_GETF2_TCC
+#define ULMBLAS_IMPL_LAPACK_GETF2_TCC 1
 
 #include <algorithm>
-#include <ulmblas/lapack/getf2.h>
-#include <ulmblas/lapack/safemin.h>
-#include <ulmblas/level1/iamax.h>
-#include <ulmblas/level1/scal.h>
-#include <ulmblas/level1/swap.h>
-#include <ulmblas/level2/ger.h>
+#include <ulmblas/impl/lapack/getf2.h>
+#include <ulmblas/impl/lapack/safemin.h>
+#include <ulmblas/impl/level1/iamax.h>
+#include <ulmblas/impl/level1/scal.h>
+#include <ulmblas/impl/level1/swap.h>
+#include <ulmblas/impl/level2/ger.h>
 
 namespace ulmBLAS {
 
@@ -63,4 +63,4 @@ getf2(IndexType    m,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LAPACK_GETF2_TCC
+#endif // ULMBLAS_IMPL_LAPACK_GETF2_TCC

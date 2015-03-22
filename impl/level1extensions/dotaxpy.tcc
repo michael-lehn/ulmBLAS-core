@@ -1,8 +1,8 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_DOTAXPY_TCC
-#define ULMBLAS_LEVEL1EXTENSIONS_DOTAXPY_TCC 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOTAXPY_TCC
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOTAXPY_TCC 1
 
-#include <ulmblas/level1extensions/dotaxpy.h>
-#include <ulmblas/level1extensions/kernel/dotaxpy.h>
+#include <ulmblas/impl/level1extensions/dotaxpy.h>
+#include <ulmblas/impl/level1extensions/kernel/dotaxpy.h>
 
 namespace ulmBLAS {
 
@@ -35,4 +35,4 @@ dotaxpy(IndexType      n,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_DOTAXPY_TCC 1
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOTAXPY_TCC 1

@@ -1,5 +1,5 @@
-#ifndef ULMBLAS_LAPACK_LAENV_H
-#define ULMBLAS_LAPACK_LAENV_H 1
+#ifndef ULMBLAS_IMPL_LAPACK_LAENV_H
+#define ULMBLAS_IMPL_LAPACK_LAENV_H 1
 
 namespace ulmBLAS {
 
@@ -15,6 +15,6 @@ template <typename T>
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LAPACK_LAENV_H
+#endif // ULMBLAS_IMPL_LAPACK_LAENV_H
 
-#include <ulmblas/lapack/laenv.tcc>
+#include <ulmblas/impl/lapack/laenv.tcc>

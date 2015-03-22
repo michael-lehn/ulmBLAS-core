@@ -1,5 +1,5 @@
-#ifndef ULMBLAS_LEVEL1EXTENSIONS_DOTXAXPYF_H
-#define ULMBLAS_LEVEL1EXTENSIONS_DOTXAXPYF_H 1
+#ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOTXAXPYF_H
+#define ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOTXAXPYF_H 1
 
 namespace ulmBLAS {
 
@@ -25,6 +25,6 @@ template <typename IndexType, typename Alpha, typename VA, typename MX,
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_LEVEL1EXTENSIONS_DOTXAXPYF_H 1
+#endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_DOTXAXPYF_H 1
 
-#include <ulmblas/level1extensions/dotxaxpyf.tcc>
+#include <ulmblas/impl/level1extensions/dotxaxpyf.tcc>
