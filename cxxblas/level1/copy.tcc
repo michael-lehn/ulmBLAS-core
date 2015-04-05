@@ -72,10 +72,10 @@ gecopy(IndexType      m,
        IndexType      incRowY,
        IndexType      incColY)
 {
-    ulmBLAS::gecopy(m, n,
-                    false, false,
-                    X, incRowX, incColX,
-                    Y, incRowY, incColY);
+    gecopy(m, n,
+           false, false,
+           X, incRowX, incColX,
+           Y, incRowY, incColY);
 }
 
 template <typename IndexType, typename MA, typename MB>
@@ -96,18 +96,38 @@ trcopy(IndexType      m,
     IndexType incRowA = (!transA) ? incRowA_ : incColA_;
     IndexType incColA = (!transA) ? incColA_ : incRowA_;
 
-    if (transA) {
-        lowerA  = !lowerA;
-    }
-
-    if (lowerA) {
-        ulmBLAS::trlcopy(m, n,
-                         unitDiagA, conjA, A, incRowA, incColA,
-                         B, incRowB, incColB);
+    if (!transA) {
+        if (lowerA) {
+            //
+            // Copy lower part of A to lower part of B
+            //
+            ulmBLAS::trlcopy(m, n,
+                             unitDiagA, conjA, A, incRowA, incColA,
+                             B, incRowB, incColB);
+        } else {
+            //
+            // Copy upper part of A to upper part of B
+            //
+            ulmBLAS::trlcopy(n, m,
+                             unitDiagA, conjA, A, incColA, incRowA,
+                             B, incColB, incRowB);
+        }
     } else {
-        ulmBLAS::trlcopy(n, m,
-                         unitDiagA, conjA, A, incColA, incRowA,
-                         B, incColB, incRowB);
+        if (lowerA) {
+            //
+            // Copy lower part of A to upper part of B
+            //
+            ulmBLAS::trlcopy(m, n,
+                             unitDiagA, conjA, A, incRowA, incColA,
+                             B, incColB, incRowB);
+        } else {
+            //
+            // Copy upper part of A to lower part of B
+            //
+            ulmBLAS::trlcopy(n, m,
+                             unitDiagA, conjA, A, incColA, incRowA,
+                             B, incRowB, incColB);
+        }
     }
 }
 

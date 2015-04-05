@@ -40,11 +40,11 @@
 
 namespace ulmBLAS {
 
-template <typename IndexType, typename Alpha, typename T, typename TB>
+template <typename IndexType, typename T, typename TB>
     void
     mtrlsm(IndexType    mc,
            IndexType    nc,
-           const Alpha  &alpha,
+           const T      &alpha,
            const T      *A_,
            T            *B_,
            TB           *B,

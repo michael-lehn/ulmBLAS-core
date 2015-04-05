@@ -1,5 +1,5 @@
-#ifndef ULMBLAS_CXXBLAS_LEVEL1_CONJ_H
-#define ULMBLAS_CXXBLAS_LEVEL1_CONJ_H 1
+#ifndef ULMBLAS_CXXBLAS_LEVEL1_CONJ_TCC
+#define ULMBLAS_CXXBLAS_LEVEL1_CONJ_TCC 1
 
 #include <ulmblas/cxxblas/level1/conj.h>
 #include <ulmblas/impl/level1extensions/conj.h>
@@ -17,4 +17,4 @@ conj(IndexType      n,
 
 } // namespace cxxblas
 
-#endif // ULMBLAS_CXXBLAS_LEVEL1_CONJ_H 1
+#endif // ULMBLAS_CXXBLAS_LEVEL1_CONJ_TCC 1

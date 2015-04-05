@@ -2,6 +2,8 @@
 #define ULMBLAS_CXXBLAS_LEVEL3_HER2K_TCC 1
 
 #include <ulmblas/cxxblas/level3/her2k.h>
+#include <ulmblas/impl/level3/helr2k.h>
+#include <ulmblas/impl/level3/heur2k.h>
 
 namespace cxxblas {
 

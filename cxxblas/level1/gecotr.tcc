@@ -2,10 +2,11 @@
 #define ULMBLAS_CXXBLAS_LEVEL1_GECOTR_TCC 1
 
 #include <ulmblas/cxxblas/level1/gecotr.h>
+#include <ulmblas/impl/level1extensions/gecotr.h>
 
 namespace cxxblas {
 
-template <typename IndexType, typename MX, typename MY>
+template <typename IndexType, typename MX>
 void
 gecotr(IndexType      n,
        bool           transX,

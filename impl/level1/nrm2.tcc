@@ -40,6 +40,7 @@
 
 #include <complex>
 #include <cmath>
+#include <ulmblas/impl/auxiliary/pow.h>
 #include <ulmblas/impl/level1/nrm2.h>
 
 namespace ulmBLAS {
@@ -75,24 +76,27 @@ nrm2(IndexType  n,
      IndexType  incX,
      Result     &result)
 {
+    using std::abs;
+    using std::sqrt;
+
     const Result  Zero(0), One(1);
 
     if (n<1) {
         result = Zero;
     } else if (n==1) {
-        result = std::abs(*x);
+        result = abs(*x);
     } else {
         Result scale = 0;
         Result ssq   = 1;
 
         for (IndexType i=0; i<n; ++i) {
             if (x[i*incX]!=Zero) {
-                Result absXi = std::abs(x[i*incX]);
+                Result absXi = abs(x[i*incX]);
                 if (scale<absXi) {
-                    ssq = One + ssq * std::pow(scale/absXi, 2);
+                    ssq = One + ssq * pow(scale/absXi, 2);
                     scale = absXi;
                 } else {
-                    ssq += std::pow(absXi/scale, 2);
+                    ssq += pow(absXi/scale, 2);
                 }
             }
         }
@@ -107,33 +111,38 @@ nrm2(IndexType                n,
      IndexType                incX,
      Result                   &result)
 {
+    using std::abs;
+    using std::imag;
+    using std::real;
+    using std::pow;
+
     const Result  Zero(0), One(1);
 
     if (n<1) {
         result = Zero;
     } else if (n==1) {
-        result = std::abs(*x);
+        result = abs(*x);
     } else {
         Result scale = 0;
         Result ssq = 1;
 
         for (IndexType i=0; i<n; ++i) {
-            if (std::real(x[i*incX]) != Zero) {
-                Result absXi = std::abs(std::real(x[i*incX]));
+            if (real(x[i*incX]) != Zero) {
+                Result absXi = abs(real(x[i*incX]));
                 if (scale<absXi) {
-                    ssq = One + ssq * std::pow(scale/absXi, 2);
+                    ssq = One + ssq * pow(scale/absXi, 2);
                     scale = absXi;
                 } else {
-                    ssq += std::pow(absXi/scale, 2);
+                    ssq += pow(absXi/scale, 2);
                 }
             }
             if (imag(x[i*incX]) != Zero) {
-                Result absXi = std::abs(std::imag(x[i*incX]));
+                Result absXi = abs(imag(x[i*incX]));
                 if (scale<absXi) {
-                    ssq = One + ssq * std::pow(scale/absXi, 2);
+                    ssq = One + ssq * pow(scale/absXi, 2);
                     scale = absXi;
                 } else {
-                    ssq += std::pow(absXi/scale, 2);
+                    ssq += pow(absXi/scale, 2);
                 }
             }
         }

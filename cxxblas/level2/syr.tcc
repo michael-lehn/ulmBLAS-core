@@ -1,7 +1,7 @@
 #ifndef ULMBLAS_CXXBLAS_LEVEL2_SYR_TCC
 #define ULMBLAS_CXXBLAS_LEVEL2_SYR_TCC 1
 
-#include <ulmblas/cxxblas/level2/her.h>
+#include <ulmblas/cxxblas/level2/syr.h>
 #include <ulmblas/ulmblas.h>
 
 namespace cxxblas {

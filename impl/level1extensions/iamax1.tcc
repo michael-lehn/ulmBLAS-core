@@ -66,6 +66,28 @@ iamax1(IndexType      n,
     return iAbsMaxX;
 }
 
+template <typename IndexType, typename VX>
+IndexType
+iamax1(IndexType                n,
+       const std::complex<VX>   *x,
+       IndexType                incX)
+{
+    IndexType iAbsMaxX = 0;
+    VX        absMaxX  = std::abs(x[iAbsMaxX]);
+
+    if (n<=0) {
+        return -1;
+    }
+
+    for (IndexType i=0; i<n; ++i) {
+        if (std::abs(x[i*incX])>absMaxX) {
+            iAbsMaxX = i;
+            absMaxX = std::abs(x[i*incX]);
+        }
+    }
+    return iAbsMaxX;
+}
+
 } // namespace ulmBLAS
 
 #endif // ULMBLAS_IMPL_LEVEL1EXTENSIONS_IAMAX1_TCC 1

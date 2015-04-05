@@ -64,7 +64,8 @@ trlmm(IndexType    m,
       IndexType    incRowB,
       IndexType    incColB)
 {
-    typedef typename std::common_type<Alpha, TA, TB>::type   T;
+    typedef typename std::common_type<Alpha, TA, TB>::type   T_;
+    typedef typename std::remove_const<T_>::type             T;
 
     const IndexType MC = BlockSize<T>::MC;
     const IndexType NC = BlockSize<T>::NC;

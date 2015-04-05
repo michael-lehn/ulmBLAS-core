@@ -38,6 +38,7 @@
 #ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_ASUM1_TCC
 #define ULMBLAS_IMPL_LEVEL1EXTENSIONS_ASUM1_TCC 1
 
+#include <cmath>
 #include <ulmblas/impl/level1extensions/asum1.h>
 
 namespace ulmBLAS {

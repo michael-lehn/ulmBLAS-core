@@ -40,11 +40,11 @@
 
 namespace ulmBLAS {
 
-template <typename IndexType, typename Alpha, typename T, typename TB>
+template <typename IndexType, typename T, typename TB>
     void
     mtrusm(IndexType    mc,
            IndexType    nc,
-           const Alpha  &alpha,
+           const T      &alpha,
            const T      *A_,
            T            *B_,
            TB           *B,
@@ -53,6 +53,6 @@ template <typename IndexType, typename Alpha, typename T, typename TB>
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_IMPL_LEVEL3_MKERNEL_MTRUSM_H
-
 #include <ulmblas/impl/level3/mkernel/mtrusm.tcc>
+
+#endif // ULMBLAS_IMPL_LEVEL3_MKERNEL_MTRUSM_H

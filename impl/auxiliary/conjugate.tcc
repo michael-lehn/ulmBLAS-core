@@ -38,7 +38,6 @@
 #ifndef ULMBLAS_IMPL_AUXILIARY_CONJ_TCC
 #define ULMBLAS_IMPL_AUXILIARY_CONJ_TCC 1
 
-#include <complex>
 #include <ulmblas/impl/auxiliary/conjugate.h>
 
 namespace ulmBLAS {
@@ -60,17 +59,15 @@ conjugate(const T &x, bool)
 }
 
 template <typename T>
-typename std::enable_if<! std::is_fundamental<T>::value,
-         const T>::type
-conjugate(const T &x)
+const std::complex<T>
+conjugate(const std::complex<T> &x)
 {
     return std::conj(x);
 }
 
 template <typename T>
-typename std::enable_if<! std::is_fundamental<T>::value,
-         const T>::type
-conjugate(const T &x, bool apply)
+const std::complex<T>
+conjugate(const std::complex<T> &x, bool apply)
 {
     return (apply) ? std::conj(x) : x;
 }

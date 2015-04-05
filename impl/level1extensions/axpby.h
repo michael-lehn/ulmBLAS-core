@@ -11,7 +11,7 @@ template <typename IndexType, typename Alpha, typename TX, typename Beta,
           const TX     *x,
           IndexType    incX,
           const Beta   &beta,
-          const TY     *y,
+          TY           *y,
           IndexType    incY);
 
 template <typename IndexType, typename Alpha, typename TX, typename Beta,
@@ -22,7 +22,7 @@ template <typename IndexType, typename Alpha, typename TX, typename Beta,
            const TX     *x,
            IndexType    incX,
            const Beta   &beta,
-           const TY     *y,
+           TY           *y,
            IndexType    incY);
 
 } // namespace ulmBLAS

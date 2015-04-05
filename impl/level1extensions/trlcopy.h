@@ -8,6 +8,7 @@ template <typename IndexType, typename MX, typename MY>
     trlcopy(IndexType    m,
             IndexType    n,
             bool         unit,
+            bool         conjA,
             MX           *X,
             IndexType    incRowX,
             IndexType    incColX,

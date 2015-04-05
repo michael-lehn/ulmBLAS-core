@@ -2,6 +2,8 @@
 #define ULMBLAS_CXXBLAS_LEVEL3_SYR2K_TCC 1
 
 #include <ulmblas/cxxblas/level3/syr2k.h>
+#include <ulmblas/impl/level3/sylr2k.h>
+#include <ulmblas/impl/level3/syur2k.h>
 
 namespace cxxblas {
 

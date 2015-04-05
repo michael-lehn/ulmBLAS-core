@@ -14,7 +14,7 @@ axpby(IndexType    n,
       const TX     *x,
       IndexType    incX,
       const Beta   &beta,
-      const TY     *y,
+      TY           *y,
       IndexType    incY)
 {
     const IndexType    UnitStride(1);
@@ -42,7 +42,7 @@ acxpby(IndexType    n,
        const TX     *x,
        IndexType    incX,
        const Beta   &beta,
-       const TY     *y,
+       TY           *y,
        IndexType    incY)
 {
     const IndexType    UnitStride(1);

@@ -2,6 +2,7 @@
 #define ULMBLAS_CXXBLAS_LEVEL1_GECONJ_TCC 1
 
 #include <ulmblas/cxxblas/level1/geconj.h>
+#include <ulmblas/impl/level1extensions/geconj.h>
 
 namespace cxxblas {
 

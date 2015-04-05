@@ -38,6 +38,7 @@
 #ifndef ULMBLAS_IMPL_AUXILIARY_CONJUGATE_H
 #define ULMBLAS_IMPL_AUXILIARY_CONJUGATE_H 1
 
+#include <complex>
 #include <type_traits>
 
 namespace ulmBLAS {
@@ -53,14 +54,12 @@ template <typename T>
     conjugate(const T &x, bool);
 
 template <typename T>
-    typename std::enable_if<! std::is_fundamental<T>::value,
-             const T>::type
-    conjugate(const T &x);
+    const std::complex<T>
+    conjugate(const std::complex<T> &x);
 
 template <typename T>
-    typename std::enable_if<! std::is_fundamental<T>::value,
-             const T>::type
-    conjugate(const T &x, bool apply);
+    const std::complex<T>
+    conjugate(const std::complex<T> &x, bool apply);
 
 } // namespace ulmBLAS
 

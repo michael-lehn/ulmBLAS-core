@@ -67,7 +67,8 @@ trusm(IndexType    m,
       IndexType    incRowB,
       IndexType    incColB)
 {
-    typedef decltype(Alpha(0)*TA(0)*TB(0))  T;
+    typedef typename std::common_type<Alpha, TA, TB>::type   T_;
+    typedef typename std::remove_const<T_>::type             T;
 
     const IndexType MC = BlockSize<T>::MC;
     const IndexType NC = BlockSize<T>::NC;
@@ -118,7 +119,7 @@ trusm(IndexType    m,
 
             // printMatrix(MR, (MC*MC/MR), A_, 1, MR);
 
-            mtrusm(mc, nc, alpha_, A_, B_,
+            mtrusm(mc, nc, T(alpha_), A_, B_,
                    &B[i*MC*incRowB+j*NC*incColB], incRowB, incColB);
 
             for (IndexType l=0; l<i; ++l) {

@@ -38,6 +38,8 @@
 #ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_IAMAX1_H
 #define ULMBLAS_IMPL_LEVEL1EXTENSIONS_IAMAX1_H 1
 
+#include <complex>
+
 namespace ulmBLAS {
 
 template <typename IndexType, typename VX>
@@ -45,6 +47,12 @@ template <typename IndexType, typename VX>
     iamax1(IndexType      n,
            const VX       *x,
            IndexType      incX);
+
+template <typename IndexType, typename VX>
+    IndexType
+    iamax1(IndexType                n,
+           const std::complex<VX>   *x,
+           IndexType                incX);
 
 } // namespace ulmBLAS
 

@@ -3,7 +3,7 @@
 
 namespace cxxblas {
 
-template <typename IndexType, typename MX, typename MY>
+template <typename IndexType, typename MX>
     void
     gecotr(IndexType      n,
            bool           transX,

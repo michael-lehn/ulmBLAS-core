@@ -35,110 +35,32 @@
  *
  */
 
-#ifndef ULMBLAS_IMPL_AUXILIARY_MEMORYPOOL_TCC
-#define ULMBLAS_IMPL_AUXILIARY_MEMORYPOOL_TCC 1
+#ifndef ULMBLAS_IMPL_AUXILIARY_ISCOMPLEX_H
+#define ULMBLAS_IMPL_AUXILIARY_ISCOMPLEX_H 1
 
-#include <cassert>
-#include <list>
-#include <unordered_map>
+#include <complex>
 #include <type_traits>
-
-#include <ulmblas/impl/auxiliary/isfundamental.h>
-#include <ulmblas/impl/auxiliary/memorypool.h>
-#include <ulmblas/impl/config/simd.h>
-
-#if defined(USE_SSE)
-#   include <xmmintrin.h>
-#endif
 
 namespace ulmBLAS {
 
 template <typename T>
-typename std::enable_if<IsFundamental<T>::value,
-         T *>::type
-malloc(size_t n)
+struct IsNotComplex
 {
-#if defined(USE_SSE)
-    return reinterpret_cast<T *>(_mm_malloc(n*sizeof(T), 16));
-#   else
-    return new T[n];
-#   endif
-}
+    static const bool value = true;
+};
 
 template <typename T>
-typename std::enable_if<! IsFundamental<T>::value,
-         T *>::type
-malloc(size_t n)
+struct IsNotComplex<std::complex<T> >
 {
-    return new T[n];
-}
+    static const bool value = false;
+};
 
 template <typename T>
-typename std::enable_if<IsFundamental<T>::value,
-         void>::type
-free(T *block)
+struct IsComplex
 {
-#if defined(USE_SSE)
-    _mm_free(reinterpret_cast<void *>(block));
-#   else
-    delete [] block;
-#   endif
-}
-
-template <typename T>
-typename std::enable_if<! IsFundamental<T>::value,
-         void>::type
-free(T *block)
-{
-    delete [] block;
-}
-
-template <typename T>
-T *
-MemoryPool<T>::allocate(size_t n)
-{
-    mutex_.lock();
-
-    BlockList &free = free_[n];
-    T         *block;
-
-    if (free.empty()) {
-        block = malloc<T>(n);
-        allocated_.push_back(block);
-    } else {
-        block = free.back();
-        free.pop_back();
-    }
-    used_[block] = n;
-
-    mutex_.unlock();
-    return block;
-}
-
-template <typename T>
-void
-MemoryPool<T>::release(T *block)
-{
-    mutex_.lock();
-
-    if (block) {
-        assert(used_.count(block)==1);
-        size_t n = used_[block];
-        free_[n].push_back(block);
-    }
-
-    mutex_.unlock();
-}
-
-template <typename T>
-MemoryPool<T>::~MemoryPool()
-{
-    while (!allocated_.empty()) {
-        free(allocated_.back());
-        allocated_.pop_back();
-    }
-}
+    static const bool value = !IsNotComplex<T>::value;
+};
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_IMPL_AUXILIARY_MEMORYPOOL_TCC
+#endif // ULMBLAS_IMPL_AUXILIARY_ISCOMPLEX_H

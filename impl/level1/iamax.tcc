@@ -50,17 +50,19 @@ iamax(IndexType      n,
       const VX       *x,
       IndexType      incX)
 {
+    using std::abs;
+
     IndexType iAbsMaxX = 0;
-    VX        absMaxX  = std::abs(x[iAbsMaxX]);
+    VX        absMaxX  = abs(x[iAbsMaxX]);
 
     if (n<=0) {
         return -1;
     }
 
     for (IndexType i=0; i<n; ++i) {
-        if (std::abs(x[i*incX])>absMaxX) {
+        if (abs(x[i*incX])>absMaxX) {
             iAbsMaxX = i;
-            absMaxX = std::abs(x[i*incX]);
+            absMaxX = abs(x[i*incX]);
         }
     }
     return iAbsMaxX;

@@ -3,6 +3,7 @@
 
 #include <ulmblas/cxxblas/level1/swap.h>
 #include <ulmblas/impl/level1/swap.h>
+#include <ulmblas/impl/level1extensions/geswap.h>
 
 namespace cxxblas {
 

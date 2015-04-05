@@ -63,7 +63,7 @@ ger(IndexType    m,
     IndexType    incRowA,
     IndexType    incColA)
 {
-    typedef decltype(Alpha(0)*TX(0)*TY(0)+TA(0))  T;
+    typedef typename std::common_type<Alpha, TX, TY, TA>::type   T;
 
     const IndexType    UnitStride(1);
     static const bool  homogeneousTypes = std::is_same<T,Alpha>::value

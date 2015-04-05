@@ -70,32 +70,32 @@ struct BlockSize
                         : std::is_same<double, T>::value               ? 384
                         : std::is_same<std::complex<float>, T>::value  ? 384
                         : std::is_same<std::complex<double>, T>::value ? 192
-                        : -1;
+                        : 192;
 
     static const int KC = std::is_same<float, T>::value                ? 384
                         : std::is_same<double, T>::value               ? 384
                         : std::is_same<std::complex<float>, T>::value  ? 384
                         : std::is_same<std::complex<double>, T>::value ? 192
-                        : -1;
+                        : 192;
 
     static const int NC = std::is_same<float, T>::value                ? 4096
                         : std::is_same<double, T>::value               ? 4096
                         : std::is_same<std::complex<float>, T>::value  ? 4096
                         : std::is_same<std::complex<double>, T>::value ? 4096
-                        : -1;
+                        : 4096;
 
 
     static const int MR = std::is_same<float, T>::value                ? 8
                         : std::is_same<double, T>::value               ? 4
                         : std::is_same<std::complex<float>, T>::value  ? 4
                         : std::is_same<std::complex<double>, T>::value ? 2
-                        : -1;
+                        : 2;
 
     static const int NR = std::is_same<float, T>::value                ? 4
                         : std::is_same<double, T>::value               ? 4
                         : std::is_same<std::complex<float>, T>::value  ? 2
                         : std::is_same<std::complex<double>, T>::value ? 2
-                        : -1;
+                        : 2;
 
     static_assert(MC>0 && KC>0 && NC>0 && MR>0 && NR>0, "Invalid block size.");
 };
@@ -109,32 +109,32 @@ struct BlockSize
                         : std::is_same<double, T>::value               ? 384
                         : std::is_same<std::complex<float>, T>::value  ? 384
                         : std::is_same<std::complex<double>, T>::value ? 192
-                        : -1;
+                        : 192;
 
     static const int KC = std::is_same<float, T>::value                ? 384
                         : std::is_same<double, T>::value               ? 384
                         : std::is_same<std::complex<float>, T>::value  ? 384
                         : std::is_same<std::complex<double>, T>::value ? 192
-                        : -1;
+                        : 192;
 
     static const int NC = std::is_same<float, T>::value                ? 4096
                         : std::is_same<double, T>::value               ? 4096
                         : std::is_same<std::complex<float>, T>::value  ? 4096
                         : std::is_same<std::complex<double>, T>::value ? 4096
-                        : -1;
+                        : 192;
 
 
     static const int MR = std::is_same<float, T>::value                ? 8
                         : std::is_same<double, T>::value               ? 4
                         : std::is_same<std::complex<float>, T>::value  ? 4
                         : std::is_same<std::complex<double>, T>::value ? 2
-                        : -1;
+                        : 2;
 
     static const int NR = std::is_same<float, T>::value                ? 4
                         : std::is_same<double, T>::value               ? 4
                         : std::is_same<std::complex<float>, T>::value  ? 2
                         : std::is_same<std::complex<double>, T>::value ? 2
-                        : -1;
+                        : 2;
 
     static_assert(MC>0 && KC>0 && NC>0 && MR>0 && NR>0, "Invalid block size.");
 };

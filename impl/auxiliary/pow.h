@@ -35,110 +35,46 @@
  *
  */
 
-#ifndef ULMBLAS_IMPL_AUXILIARY_MEMORYPOOL_TCC
-#define ULMBLAS_IMPL_AUXILIARY_MEMORYPOOL_TCC 1
+#ifndef ULMBLAS_IMPL_AUXILIARY_POW_H
+#define ULMBLAS_IMPL_AUXILIARY_POW_H 1
 
-#include <cassert>
-#include <list>
-#include <unordered_map>
 #include <type_traits>
+#include <ulmblas/impl/auxiliary/iscomplex.h>
+#include <ulmblas/impl/auxiliary/ismpfrreal.h>
 
-#include <ulmblas/impl/auxiliary/isfundamental.h>
-#include <ulmblas/impl/auxiliary/memorypool.h>
-#include <ulmblas/impl/config/simd.h>
-
-#if defined(USE_SSE)
-#   include <xmmintrin.h>
+#ifdef WITH_MPFR
+#include <external/real.hpp>
 #endif
 
 namespace ulmBLAS {
 
 template <typename T>
-typename std::enable_if<IsFundamental<T>::value,
-         T *>::type
-malloc(size_t n)
-{
-#if defined(USE_SSE)
-    return reinterpret_cast<T *>(_mm_malloc(n*sizeof(T), 16));
-#   else
-    return new T[n];
-#   endif
-}
+    typename std::enable_if<std::is_same<T, int>::value,
+             T>::type
+    pow(const T &base, const T &exponent);
+
+#ifdef WITH_MPFR
+template <typename T>
+    typename std::enable_if<! std::is_same<T, int>::value
+                         && IsNotComplex<T>::value
+                         && !IsMpfrReal<T>::value,
+             T>::type
+    pow(const T &base, int exponent);
+#else
+template <typename T>
+    typename std::enable_if<!std::is_same<T,int>::value
+                         && !IsComplex<T>::value,
+             T>::type
+    pow(const T &base, int exponent);
+#endif
 
 template <typename T>
-typename std::enable_if<! IsFundamental<T>::value,
-         T *>::type
-malloc(size_t n)
-{
-    return new T[n];
-}
+    std::complex<T>
+    pow(const std::complex<T> &base, int exponent);
 
-template <typename T>
-typename std::enable_if<IsFundamental<T>::value,
-         void>::type
-free(T *block)
-{
-#if defined(USE_SSE)
-    _mm_free(reinterpret_cast<void *>(block));
-#   else
-    delete [] block;
-#   endif
-}
-
-template <typename T>
-typename std::enable_if<! IsFundamental<T>::value,
-         void>::type
-free(T *block)
-{
-    delete [] block;
-}
-
-template <typename T>
-T *
-MemoryPool<T>::allocate(size_t n)
-{
-    mutex_.lock();
-
-    BlockList &free = free_[n];
-    T         *block;
-
-    if (free.empty()) {
-        block = malloc<T>(n);
-        allocated_.push_back(block);
-    } else {
-        block = free.back();
-        free.pop_back();
-    }
-    used_[block] = n;
-
-    mutex_.unlock();
-    return block;
-}
-
-template <typename T>
-void
-MemoryPool<T>::release(T *block)
-{
-    mutex_.lock();
-
-    if (block) {
-        assert(used_.count(block)==1);
-        size_t n = used_[block];
-        free_[n].push_back(block);
-    }
-
-    mutex_.unlock();
-}
-
-template <typename T>
-MemoryPool<T>::~MemoryPool()
-{
-    while (!allocated_.empty()) {
-        free(allocated_.back());
-        allocated_.pop_back();
-    }
-}
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_IMPL_AUXILIARY_MEMORYPOOL_TCC
+#include <ulmblas/impl/auxiliary/pow.tcc>
+
+#endif // ULMBLAS_IMPL_AUXILIARY_POW_H

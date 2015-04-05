@@ -1,6 +1,8 @@
 #ifndef ULMBLAS_CXXBLAS_LEVEL1_ROT_H
 #define ULMBLAS_CXXBLAS_LEVEL1_ROT_H 1
 
+#include <complex>
+
 namespace cxxblas {
 
 template <typename A, typename B, typename T>

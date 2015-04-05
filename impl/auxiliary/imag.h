@@ -44,7 +44,7 @@ namespace ulmBLAS {
 
 template <typename T>
     typename std::enable_if<std::is_fundamental<T>::value,
-             const T &>::type
+             const T>::type
     imag(const T &x);
 
 template <typename T>

@@ -35,30 +35,25 @@
  *
  */
 
-#ifndef ULMBLAS_IMPL_AUXILIARY_IMAG_TCC
-#define ULMBLAS_IMPL_AUXILIARY_IMAG_TCC 1
+#ifndef ULMBLAS_IMPL_AUXILIARY_ISFUNDAMENTAL_H
+#define ULMBLAS_IMPL_AUXILIARY_ISFUNDAMENTAL_H 1
 
-#include <ulmblas/impl/auxiliary/real.h>
 #include <complex>
+#include <type_traits>
 
 namespace ulmBLAS {
 
 template <typename T>
-typename std::enable_if<std::is_fundamental<T>::value,
-         const T>::type
-imag(const T &)
+struct IsFundamental
 {
-    return T(0);
-}
-
-template <typename T>
-typename std::enable_if<! std::is_fundamental<T>::value,
-         const T>::type
-imag(const T &x)
-{
-    return std::imag(x);
-}
+    static const bool value = std::is_same<T, int>::value
+                           || std::is_same<T, long>::value
+                           || std::is_same<T, float>::value
+                           || std::is_same<T, double>::value
+                           || std::is_same<T, std::complex<float> >::value
+                           || std::is_same<T, std::complex<double> >::value;
+};
 
 } // namespace ulmBLAS
 
-#endif // ULMBLAS_IMPL_AUXILIARY_IMAG_TCC
+#endif // ULMBLAS_IMPL_AUXILIARY_ISFUNDAMENTAL_H

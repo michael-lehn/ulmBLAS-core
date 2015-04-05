@@ -1,7 +1,7 @@
-#ifndef ULMBLAS_CXXBLAS_LEVEL1_AXPY_TCC
-#define ULMBLAS_CXXBLAS_LEVEL1_AXPY_TCC 1
+#ifndef ULMBLAS_CXXBLAS_LEVEL1_AXPBY_TCC
+#define ULMBLAS_CXXBLAS_LEVEL1_AXPBY_TCC 1
 
-#include <ulmblas/cxxblas/level1/axpy.tcc>
+#include <ulmblas/cxxblas/level1/axpby.tcc>
 #include <ulmblas/impl/level1extensions/axpby.h>
 
 namespace cxxblas {
@@ -14,7 +14,7 @@ axpby(IndexType    n,
       const TX     *x,
       IndexType    incX,
       const Beta   &beta,
-      const TY     *y,
+      TY           *y,
       IndexType    incY)
 {
     ulmBLAS::axpby(n, alpha, x, incX, beta, y, incY);
@@ -28,7 +28,7 @@ acxpby(IndexType    n,
        const TX     *x,
        IndexType    incX,
        const Beta   &beta,
-       const TY     *y,
+       TY           *y,
        IndexType    incY)
 {
     ulmBLAS::acxpby(n, alpha, x, incX, beta, y, incY);
@@ -36,4 +36,4 @@ acxpby(IndexType    n,
 
 } // namespace cxxblas
 
-#endif // ULMBLAS_CXXBLAS_LEVEL1_AXPY_TCC
+#endif // ULMBLAS_CXXBLAS_LEVEL1_AXPBY_TCC

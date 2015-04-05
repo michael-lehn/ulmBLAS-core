@@ -35,30 +35,30 @@
  *
  */
 
-#ifndef ULMBLAS_IMPL_AUXILIARY_IMAG_TCC
-#define ULMBLAS_IMPL_AUXILIARY_IMAG_TCC 1
+#ifndef ULMBLAS_IMPL_AUXILIARY_ISMPFRREAL_H
+#define ULMBLAS_IMPL_AUXILIARY_ISMPFRREAL_H 1
 
-#include <ulmblas/impl/auxiliary/real.h>
+#ifdef WITH_MPFR
+
 #include <complex>
+#include <external/real.hpp>
 
 namespace ulmBLAS {
 
 template <typename T>
-typename std::enable_if<std::is_fundamental<T>::value,
-         const T>::type
-imag(const T &)
+struct IsMpfrReal
 {
-    return T(0);
-}
+    static const bool value = false;
+};
 
-template <typename T>
-typename std::enable_if<! std::is_fundamental<T>::value,
-         const T>::type
-imag(const T &x)
+template <mpfr::real_prec_t prec, mpfr::real_rnd_t rnd>
+struct IsMpfrReal<mpfr::real<prec, rnd> >
 {
-    return std::imag(x);
-}
+    static const bool value = true;
+};
 
-} // namespace ulmBLAS
+} // namespace cxxblas
 
-#endif // ULMBLAS_IMPL_AUXILIARY_IMAG_TCC
+#endif // WITH_MPFR
+
+#endif // ULMBLAS_IMPL_AUXILIARY_ISMPFRREAL_H
