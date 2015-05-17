@@ -96,6 +96,7 @@ mtrlmm(IndexType    mc,
                       Zero,
                       &B[i*MR*incRowB+j*NR*incColB], incRowB, incColB,
                       nextA, nextB);
+                //printMatrix(MR, NR, &B[i*MR*incRowB+j*NR*incColB], incRowB, incColB);
             } else {
                 // Call the buffered micro kernel
                 ugemm(mr, nr, kc,

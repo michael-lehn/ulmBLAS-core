@@ -6,6 +6,7 @@
 #include <ulmblas/impl/level1extensions/geaxpy.h>
 #include <ulmblas/impl/level1extensions/gescal.h>
 #include <ulmblas/impl/level3/ukernel/ugemm.h>
+#include <algorithm>
 
 namespace ulmBLAS {
 
@@ -31,6 +32,9 @@ ugemm(IndexType    mr,
     const IndexType NR = BlockSizeUGemm<T>::NR;
 
     T   C_[MR*NR];
+
+    // make sure there is no NaN in buffer
+    std::fill_n(C_, MR*NR, T(0));
 
     ugemm(kc, alpha, A, B, T(0), C_, IndexType(1), MR, nextA, nextB);
     gescal(mr, nr, beta, C, incRowC, incColC);

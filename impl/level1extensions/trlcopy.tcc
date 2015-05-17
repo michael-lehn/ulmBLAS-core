@@ -28,9 +28,13 @@ trlcopy(IndexType    m,
     }
 
     if (unit) {
-        trlcopy(m-1, n-1, false, conjA,
+        trlcopy(m-1, n, false, conjA,
                 &X[1*incRowX], incRowX, incColX,
                 &Y[1*incRowY], incRowY, incColY);
+
+        for (IndexType i=0; i<std::min(m, n); ++i) {
+            Y[i*(incRowY+incColY)] = MY(1);
+        }
         return;
     }
 

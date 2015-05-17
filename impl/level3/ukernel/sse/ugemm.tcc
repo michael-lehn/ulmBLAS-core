@@ -409,6 +409,7 @@ ugemm(IndexType      kc,
     "addpd  %%xmm15,             %%xmm4 \n\t"  // add results
     "movlpd %%xmm4,        (%%r11)      \n\t"  // write back (C23,
     "movhpd %%xmm4,        (%%rdx,%%r8) \n\t"  //             C32)
+
     : // output
     : // input
         "m" (kb),       // 0
