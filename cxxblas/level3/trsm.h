@@ -5,7 +5,7 @@ namespace cxxblas {
 
 template <typename IndexType, typename Alpha, typename TA, typename TB>
     void
-    trsm(bool         left,
+    trsm(bool         leftA,
          IndexType    m,
          IndexType    n,
          const Alpha  &alpha,
