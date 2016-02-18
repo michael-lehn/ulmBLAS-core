@@ -38,53 +38,11 @@
 
 #include <ulmblas/impl/auxiliary/isfundamental.h>
 #include <ulmblas/impl/auxiliary/memorypool.h>
-#include <ulmblas/impl/config/simd.h>
+#include <ulmblas/impl/auxiliary/malloc_aligned.h>
+#include <ulmblas/impl/config/blocksize.h>
 
-#if defined(USE_SSE)
-#   include <xmmintrin.h>
-#endif
 
 namespace ulmBLAS {
-
-template <typename T>
-typename std::enable_if<IsFundamental<T>::value,
-         T *>::type
-malloc(size_t n)
-{
-#if defined(USE_SSE)
-    return reinterpret_cast<T *>(_mm_malloc(n*sizeof(T), 16));
-#   else
-    return new T[n];
-#   endif
-}
-
-template <typename T>
-typename std::enable_if<! IsFundamental<T>::value,
-         T *>::type
-malloc(size_t n)
-{
-    return new T[n];
-}
-
-template <typename T>
-typename std::enable_if<IsFundamental<T>::value,
-         void>::type
-free(T *block)
-{
-#if defined(USE_SSE)
-    _mm_free(reinterpret_cast<void *>(block));
-#   else
-    delete [] block;
-#   endif
-}
-
-template <typename T>
-typename std::enable_if<! IsFundamental<T>::value,
-         void>::type
-free(T *block)
-{
-    delete [] block;
-}
 
 template <typename T>
 T *
@@ -92,11 +50,17 @@ MemoryPool<T>::allocate(size_t n)
 {
     mutex_.lock();
 
+    constexpr std::size_t align = BlockSize<T>::align;
+
     BlockList &free = free_[n];
     T         *block;
 
     if (free.empty()) {
-        block = malloc<T>(n);
+        if (align!=0) {
+            block = malloc_aligned<T,align>(n);
+        } else {
+            block = new T[n];
+        }
         allocated_.push_back(block);
     } else {
         block = free.back();
@@ -126,8 +90,14 @@ MemoryPool<T>::release(T *block)
 template <typename T>
 MemoryPool<T>::~MemoryPool()
 {
+    constexpr std::size_t align = BlockSize<T>::align;
+
     while (!allocated_.empty()) {
-        free(allocated_.back());
+        if (align!=0) {
+            free_aligned(allocated_.back());
+        } else {
+            delete [] allocated_.back();
+        }
         allocated_.pop_back();
     }
 }

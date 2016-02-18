@@ -34,105 +34,201 @@
 #include <complex>
 #include <type_traits>
 
-#include <ulmblas/impl/config/simd.h>
-
 namespace ulmBLAS {
 
 #if defined(USE_TESTPARAM)
 
-template <typename T>
-struct BlockSize
-{
-    static const int MC = USE_TESTPARAM_MC;
-    static const int KC = USE_TESTPARAM_KC;
-    static const int NC = USE_TESTPARAM_NC;
+#   define BS_DEFAULT_MC_S          USE_TESTPARAM_MC
+#   define BS_DEFAULT_KC_S          USE_TESTPARAM_KC
+#   define BS_DEFAULT_NC_S          USE_TESTPARAM_NC
+#   define BS_DEFAULT_MR_S          USE_TESTPARAM_MR
+#   define BS_DEFAULT_NR_S          USE_TESTPARAM_NR
+
+#   define BS_DEFAULT_MC_D          USE_TESTPARAM_MC
+#   define BS_DEFAULT_KC_D          USE_TESTPARAM_KC
+#   define BS_DEFAULT_NC_D          USE_TESTPARAM_NC
+#   define BS_DEFAULT_MR_D          USE_TESTPARAM_MR
+#   define BS_DEFAULT_NR_D          USE_TESTPARAM_NR
+
+#   define BS_DEFAULT_MC_C          USE_TESTPARAM_MC
+#   define BS_DEFAULT_KC_C          USE_TESTPARAM_KC
+#   define BS_DEFAULT_NC_C          USE_TESTPARAM_NC
+#   define BS_DEFAULT_MR_C          USE_TESTPARAM_MR
+#   define BS_DEFAULT_NR_C          USE_TESTPARAM_NR
+
+#   define BS_DEFAULT_MC_Z          USE_TESTPARAM_MC
+#   define BS_DEFAULT_KC_Z          USE_TESTPARAM_KC
+#   define BS_DEFAULT_NC_Z          USE_TESTPARAM_NC
+#   define BS_DEFAULT_MR_Z          USE_TESTPARAM_MR
+#   define BS_DEFAULT_NR_Z          USE_TESTPARAM_NR
+
+#elif defined(USE_FMA)
+
+#   define SIMD_WIDTH               256
+
+#   define BS_DEFAULT_MC_S          144
+#   define BS_DEFAULT_KC_S          256
+#   define BS_DEFAULT_NC_S          4080
+#   define BS_DEFAULT_MR_S          16
+#   define BS_DEFAULT_NR_S          6
+
+#   ifdef USE_4_12
+#      define BS_DEFAULT_MC_D       72
+#      define BS_DEFAULT_KC_D       256
+#      define BS_DEFAULT_NC_D       4080
+#      define BS_DEFAULT_MR_D       8
+#      define BS_DEFAULT_NR_D       6
+#   else
+#      define BS_DEFAULT_MC_D       96
+#      define BS_DEFAULT_KC_D       192
+#      define BS_DEFAULT_NC_D       4080
+#      define BS_DEFAULT_MR_D       4
+#      define BS_DEFAULT_NR_D       12
+#   endif
+
+#   define BS_DEFAULT_MC_C          96
+#   define BS_DEFAULT_KC_C          256
+#   define BS_DEFAULT_NC_C          4096
+#   define BS_DEFAULT_MR_C          8
+#   define BS_DEFAULT_NR_C          4
+
+#   define BS_DEFAULT_MC_Z          64
+#   define BS_DEFAULT_KC_Z          192
+#   define BS_DEFAULT_NC_Z          4096
+#   define BS_DEFAULT_MR_Z          4
+#   define BS_DEFAULT_NR_Z          4
 
 
-    static const int MR = USE_TESTPARAM_MR;
-    static const int NR = USE_TESTPARAM_NR;
+#elif defined(USE_AVX)
 
-    static_assert(MC>0 && KC>0 && NC>0 && MR>0 && NR>0, "Invalid block size.");
-};
+#   define SIMD_WIDTH               256
+
+#   define BS_DEFAULT_MC_S          128
+#   define BS_DEFAULT_KC_S          384
+#   define BS_DEFAULT_NC_S          4096
+#   define BS_DEFAULT_MR_S          8
+#   define BS_DEFAULT_NR_S          8
+
+#   define BS_DEFAULT_MC_D          96
+#   define BS_DEFAULT_KC_D          256
+#   define BS_DEFAULT_NC_D          4096
+#   define BS_DEFAULT_MR_D          4
+#   define BS_DEFAULT_NR_D          8
+
+#   define BS_DEFAULT_MC_C          96
+#   define BS_DEFAULT_KC_C          256
+#   define BS_DEFAULT_NC_C          4096
+#   define BS_DEFAULT_MR_C          8
+#   define BS_DEFAULT_NR_C          4
+
+#   define BS_DEFAULT_MC_Z          64
+#   define BS_DEFAULT_KC_Z          192
+#   define BS_DEFAULT_NC_Z          4096
+#   define BS_DEFAULT_MR_Z          4
+#   define BS_DEFAULT_NR_Z          4
 
 #elif defined(USE_SSE)
 
-template <typename T>
-struct BlockSize
-{
-    static const int MC = std::is_same<float, T>::value                ? 768
-                        : std::is_same<double, T>::value               ? 384
-                        : std::is_same<std::complex<float>, T>::value  ? 384
-                        : std::is_same<std::complex<double>, T>::value ? 192
-                        : 192;
+#   define SIMD_WIDTH               128
 
-    static const int KC = std::is_same<float, T>::value                ? 384
-                        : std::is_same<double, T>::value               ? 384
-                        : std::is_same<std::complex<float>, T>::value  ? 384
-                        : std::is_same<std::complex<double>, T>::value ? 192
-                        : 192;
+#   define BS_DEFAULT_MC_S          768
+#   define BS_DEFAULT_KC_S          384
+#   define BS_DEFAULT_NC_S          4096
+#   define BS_DEFAULT_MR_S          8
+#   define BS_DEFAULT_NR_S          4
 
-    static const int NC = std::is_same<float, T>::value                ? 4096
-                        : std::is_same<double, T>::value               ? 4096
-                        : std::is_same<std::complex<float>, T>::value  ? 4096
-                        : std::is_same<std::complex<double>, T>::value ? 4096
-                        : 4096;
+#   define BS_DEFAULT_MC_D          384
+#   define BS_DEFAULT_KC_D          384
+#   define BS_DEFAULT_NC_D          4096
+#   define BS_DEFAULT_MR_D          4
+#   define BS_DEFAULT_NR_D          4
 
+#   define BS_DEFAULT_MC_C          384
+#   define BS_DEFAULT_KC_C          384
+#   define BS_DEFAULT_NC_C          4096
+#   define BS_DEFAULT_MR_C          4
+#   define BS_DEFAULT_NR_C          2
 
-    static const int MR = std::is_same<float, T>::value                ? 8
-                        : std::is_same<double, T>::value               ? 4
-                        : std::is_same<std::complex<float>, T>::value  ? 4
-                        : std::is_same<std::complex<double>, T>::value ? 2
-                        : 2;
-
-    static const int NR = std::is_same<float, T>::value                ? 4
-                        : std::is_same<double, T>::value               ? 4
-                        : std::is_same<std::complex<float>, T>::value  ? 2
-                        : std::is_same<std::complex<double>, T>::value ? 2
-                        : 2;
-
-    static_assert(MC>0 && KC>0 && NC>0 && MR>0 && NR>0, "Invalid block size.");
-};
+#   define BS_DEFAULT_MC_Z          192
+#   define BS_DEFAULT_KC_Z          384
+#   define BS_DEFAULT_NC_Z          4096
+#   define BS_DEFAULT_MR_Z          2
+#   define BS_DEFAULT_NR_Z          2
 
 #else
 
+#   define SIMD_WIDTH               0
+
+#   define BS_DEFAULT_MC_S          768
+#   define BS_DEFAULT_KC_S          384
+#   define BS_DEFAULT_NC_S          4096
+#   define BS_DEFAULT_MR_S          8
+#   define BS_DEFAULT_NR_S          4
+
+#   define BS_DEFAULT_MC_D          384
+#   define BS_DEFAULT_KC_D          384
+#   define BS_DEFAULT_NC_D          4096
+#   define BS_DEFAULT_MR_D          4
+#   define BS_DEFAULT_NR_D          4
+
+#   define BS_DEFAULT_MC_C          384
+#   define BS_DEFAULT_KC_C          384
+#   define BS_DEFAULT_NC_C          4096
+#   define BS_DEFAULT_MR_C          4
+#   define BS_DEFAULT_NR_C          2
+
+#   define BS_DEFAULT_MC_Z          192
+#   define BS_DEFAULT_KC_Z          384
+#   define BS_DEFAULT_NC_Z          4096
+#   define BS_DEFAULT_MR_Z          2
+#   define BS_DEFAULT_NR_Z          2
+
+#endif
+
 template <typename T>
 struct BlockSize
 {
-    static const int MC = std::is_same<float, T>::value                ? 768
-                        : std::is_same<double, T>::value               ? 384
-                        : std::is_same<std::complex<float>, T>::value  ? 384
-                        : std::is_same<std::complex<double>, T>::value ? 192
+    typedef float                   S;
+    typedef double                  D;
+    typedef std::complex<float>     C;
+    typedef std::complex<double>    Z;
+
+    static const int MC = std::is_same<S, T>::value ? BS_DEFAULT_MC_S
+                        : std::is_same<D, T>::value ? BS_DEFAULT_MC_D
+                        : std::is_same<C, T>::value ? BS_DEFAULT_MC_C
+                        : std::is_same<Z, T>::value ? BS_DEFAULT_MC_Z
                         : 192;
-
-    static const int KC = std::is_same<float, T>::value                ? 384
-                        : std::is_same<double, T>::value               ? 384
-                        : std::is_same<std::complex<float>, T>::value  ? 384
-                        : std::is_same<std::complex<double>, T>::value ? 192
+    static const int KC = std::is_same<S, T>::value ? BS_DEFAULT_KC_S
+                        : std::is_same<D, T>::value ? BS_DEFAULT_KC_D
+                        : std::is_same<C, T>::value ? BS_DEFAULT_KC_C
+                        : std::is_same<Z, T>::value ? BS_DEFAULT_KC_Z
                         : 192;
-
-    static const int NC = std::is_same<float, T>::value                ? 4096
-                        : std::is_same<double, T>::value               ? 4096
-                        : std::is_same<std::complex<float>, T>::value  ? 4096
-                        : std::is_same<std::complex<double>, T>::value ? 4096
-                        : 192;
-
-
-    static const int MR = std::is_same<float, T>::value                ? 8
-                        : std::is_same<double, T>::value               ? 4
-                        : std::is_same<std::complex<float>, T>::value  ? 4
-                        : std::is_same<std::complex<double>, T>::value ? 2
+    static const int NC = std::is_same<S, T>::value ? BS_DEFAULT_NC_S
+                        : std::is_same<D, T>::value ? BS_DEFAULT_NC_D
+                        : std::is_same<C, T>::value ? BS_DEFAULT_NC_C
+                        : std::is_same<Z, T>::value ? BS_DEFAULT_NC_Z
+                        : 4096;
+    static const int MR = std::is_same<S, T>::value ? BS_DEFAULT_MR_S
+                        : std::is_same<D, T>::value ? BS_DEFAULT_MR_D
+                        : std::is_same<C, T>::value ? BS_DEFAULT_MR_C
+                        : std::is_same<D, T>::value ? BS_DEFAULT_MR_Z
                         : 2;
 
-    static const int NR = std::is_same<float, T>::value                ? 4
-                        : std::is_same<double, T>::value               ? 4
-                        : std::is_same<std::complex<float>, T>::value  ? 2
-                        : std::is_same<std::complex<double>, T>::value ? 2
+    static const int NR = std::is_same<S, T>::value ? BS_DEFAULT_NR_S
+                        : std::is_same<D, T>::value ? BS_DEFAULT_NR_D
+                        : std::is_same<C, T>::value ? BS_DEFAULT_NR_C
+                        : std::is_same<Z, T>::value ? BS_DEFAULT_NR_Z
                         : 2;
+
+    static constexpr int rwidth = SIMD_WIDTH;   // SIMD-Register width in bits
+    static constexpr int align  = rwidth / 8;   // SIMD-Register width in bytes
+    static constexpr int vlen   = rwidth / (8*sizeof(T));
 
     static_assert(MC>0 && KC>0 && NC>0 && MR>0 && NR>0, "Invalid block size.");
+    static_assert(MC % MR == 0, "MC must be a multiple of MR.");
+    static_assert(NC % NR == 0, "NC must be a multiple of NR.");
 };
 
-#endif
 
 
 } // namespace ulmBLAS

@@ -37,19 +37,18 @@
 #if defined(USE_SSE)
 #   define  SELECT_UGEMM_KERNEL     sse
 #   include <ulmblas/impl/level3/ukernel/sse/ugemm.h>
+#elif defined (USE_AVX)
+#   define  SELECT_UGEMM_KERNEL     avx
+#   include <ulmblas/impl/level3/ukernel/avx/ugemm.h>
+#elif defined (USE_FMA)
+#   define  SELECT_UGEMM_KERNEL     fma
+#   include <ulmblas/impl/level3/ukernel/fma/ugemm.h>
 #else
 #   define  SELECT_UGEMM_KERNEL     ref
 #   include <ulmblas/impl/level3/ukernel/ref/ugemm.h>
 #endif
 
 namespace ulmBLAS {
-
-template <typename T>
-struct BlockSizeUGemm
-{
-    static const int MR = SELECT_UGEMM_KERNEL::BlockSizeUGemm<T>::MR;
-    static const int NR = SELECT_UGEMM_KERNEL::BlockSizeUGemm<T>::NR;
-};
 
 //
 //  Buffered variant.  Used for zero padded panels.

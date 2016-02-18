@@ -34,8 +34,6 @@
 #include <complex>
 #include <type_traits>
 
-#include <ulmblas/impl/config/simd.h>
-
 namespace ulmBLAS {
 
 #if defined(USE_TESTPARAM)

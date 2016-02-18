@@ -31,8 +31,6 @@
 #ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_KERNEL_DOTXF_H
 #define ULMBLAS_IMPL_LEVEL1EXTENSIONS_KERNEL_DOTXF_H 1
 
-#include <ulmblas/impl/config/simd.h>
-
 #if defined(USE_SSE)
 #   define  SELECT_DOTXF_KERNEL     sse
 #   include <ulmblas/impl/level1extensions/kernel/sse/dotxf.h>

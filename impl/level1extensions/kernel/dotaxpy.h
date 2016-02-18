@@ -31,8 +31,6 @@
 #ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_KERNEL_DOTAXPY_H
 #define ULMBLAS_IMPL_LEVEL1EXTENSIONS_KERNEL_DOTAXPY_H 1
 
-#include <ulmblas/impl/config/simd.h>
-
 #if defined(USE_SSE)
 #   define  SELECT_DOTAXPY_KERNEL     sse
 #   include <ulmblas/impl/level1extensions/kernel/sse/dotaxpy.h>

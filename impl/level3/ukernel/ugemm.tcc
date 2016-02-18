@@ -32,7 +32,6 @@
 #define ULMBLAS_IMPL_LEVEL3_UKERNEL_UGEMM_TCC 1
 
 #include <ulmblas/impl/auxiliary/printmatrix.h>
-#include <ulmblas/impl/config/simd.h>
 #include <ulmblas/impl/level1extensions/geaxpy.h>
 #include <ulmblas/impl/level1extensions/gescal.h>
 #include <ulmblas/impl/level3/ukernel/ugemm.h>
@@ -58,8 +57,8 @@ ugemm(IndexType    mr,
       const T      *nextA,
       const T      *nextB)
 {
-    const IndexType MR = BlockSizeUGemm<T>::MR;
-    const IndexType NR = BlockSizeUGemm<T>::NR;
+    const IndexType MR = BlockSize<T>::MR;
+    const IndexType NR = BlockSize<T>::NR;
 
     T   C_[MR*NR];
 
@@ -88,8 +87,8 @@ ugemm(IndexType   kc,
       const T     *nextA,
       const T     *nextB)
 {
-    const IndexType MR = BlockSizeUGemm<T>::MR;
-    const IndexType NR = BlockSizeUGemm<T>::NR;
+    const IndexType MR = BlockSize<T>::MR;
+    const IndexType NR = BlockSize<T>::NR;
 
     ugemm(MR, NR, kc, alpha, A, B, beta, C, incRowC, incColC, nextA, nextB);
 }

@@ -36,22 +36,14 @@
 
 namespace ulmBLAS { namespace sse {
 
-template <typename T>
-struct BlockSizeUGemm
-{
-    static const int MR = (std::is_same<T,double>::value) ? 4
-                        : ref::BlockSizeUGemm<T>::MR;
-    static const int NR = (std::is_same<T,double>::value) ? 4
-                        : ref::BlockSizeUGemm<T>::NR;
-
-    static_assert(MR>0 && NR>0, "Invalid block size.");
-};
-
 using ref::ugemm;
 
 template <typename IndexType>
-static typename std::enable_if<std::is_convertible<IndexType,long>::value,
-    void>::type
+typename std::enable_if<std::is_convertible<IndexType, std::int64_t>::value
+                     && BlockSize<double>::MR==4
+                     && BlockSize<double>::NR==4
+                     && BlockSize<double>::align==16,
+             void>::type
     ugemm(IndexType      kc_,
           const double   &alpha,
           const double   *A,

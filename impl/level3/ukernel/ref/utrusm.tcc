@@ -46,8 +46,8 @@ utrusm(const T     *A,
        IndexType   incRowC,
        IndexType   incColC)
 {
-    const IndexType MR = BlockSizeUGemm<T>::MR;
-    const IndexType NR = BlockSizeUGemm<T>::NR;
+    const IndexType MR = BlockSize<T>::MR;
+    const IndexType NR = BlockSize<T>::NR;
 
     T   C_[MR*NR];
 

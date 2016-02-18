@@ -34,6 +34,5 @@
 #include <ulmblas/impl/config/blocksize.h>
 #include <ulmblas/impl/config/config.h>
 #include <ulmblas/impl/config/fusefactor.h>
-#include <ulmblas/impl/config/simd.h>
 
 #endif // ULMBLAS_IMPL_CONFIG_CONFIG_H

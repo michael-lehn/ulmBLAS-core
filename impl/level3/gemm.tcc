@@ -67,8 +67,8 @@ gemm(IndexType    m,
     const IndexType NC = BlockSize<T>::NC;
     const IndexType KC = BlockSize<T>::KC;
 
-    const IndexType MR = BlockSizeUGemm<T>::MR;
-    const IndexType NR = BlockSizeUGemm<T>::NR;
+    const IndexType MR = BlockSize<T>::MR;
+    const IndexType NR = BlockSize<T>::NR;
 
     const IndexType mb = (m+MC-1) / MC;
     const IndexType nb = (n+NC-1) / NC;

@@ -50,8 +50,8 @@ mgemm(IndexType     mc,
       IndexType     incRowC,
       IndexType     incColC)
 {
-    const IndexType MR = BlockSizeUGemm<T>::MR;
-    const IndexType NR = BlockSizeUGemm<T>::NR;
+    const IndexType MR = BlockSize<T>::MR;
+    const IndexType NR = BlockSize<T>::NR;
 
     const IndexType mp = (mc+MR-1) / MR;
     const IndexType np = (nc+NR-1) / NR;

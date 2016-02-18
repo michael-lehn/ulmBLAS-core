@@ -31,8 +31,6 @@
 #ifndef ULMBLAS_IMPL_LEVEL1EXTENSIONS_KERNEL_AXPYF_H
 #define ULMBLAS_IMPL_LEVEL1EXTENSIONS_KERNEL_AXPYF_H 1
 
-#include <ulmblas/impl/config/simd.h>
-
 #if defined(USE_SSE)
 #   define  SELECT_AXPYF_KERNEL     sse
 #   include <ulmblas/impl/level1extensions/kernel/sse/axpyf.h>

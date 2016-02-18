@@ -46,7 +46,7 @@ pack_MRxk(IndexType   k,
           IndexType   incColA,
           Buffer      *buffer)
 {
-    const IndexType MR = BlockSizeUGemm<Buffer>::MR;
+    const IndexType MR = BlockSize<Buffer>::MR;
 
     if (!conj) {
         for (IndexType j=0; j<k; ++j) {
@@ -77,7 +77,7 @@ gepack_A(IndexType   mc,
          IndexType   incColA,
          Buffer      *buffer)
 {
-    const IndexType MR  = BlockSizeUGemm<Buffer>::MR;
+    const IndexType MR  = BlockSize<Buffer>::MR;
     const IndexType mp  = mc / MR;
     const IndexType mr_ = mc % MR;
 
@@ -109,7 +109,7 @@ pack_kxNR(IndexType   k,
           IndexType   incColB,
           Buffer      *buffer)
 {
-    const IndexType NR = BlockSizeUGemm<Buffer>::NR;
+    const IndexType NR = BlockSize<Buffer>::NR;
 
     if (!conj) {
         for (IndexType i=0; i<k; ++i) {
@@ -140,7 +140,7 @@ gepack_B(IndexType   kc,
          IndexType   incColB,
          Buffer      *buffer)
 {
-    const IndexType NR  = BlockSizeUGemm<Buffer>::NR;
+    const IndexType NR  = BlockSize<Buffer>::NR;
     const IndexType np  = nc / NR;
     const IndexType nr_ = nc % NR;
 

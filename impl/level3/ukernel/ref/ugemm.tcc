@@ -48,8 +48,8 @@ ugemm(IndexType   kc,
       const T     *,
       const T     *)
 {
-    const IndexType MR = BlockSizeUGemm<T>::MR;
-    const IndexType NR = BlockSizeUGemm<T>::NR;
+    const IndexType MR = BlockSize<T>::MR;
+    const IndexType NR = BlockSize<T>::NR;
 
     T AB[MR*NR];
 

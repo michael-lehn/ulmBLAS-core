@@ -31,7 +31,6 @@
 #ifndef ULMBLAS_IMPL_LEVEL3_UKERNEL_UTRLSM_TCC
 #define ULMBLAS_IMPL_LEVEL3_UKERNEL_UTRLSM_TCC 1
 
-#include <ulmblas/impl/config/simd.h>
 #include <ulmblas/impl/level1/scal.h>
 #include <ulmblas/impl/level1extensions/gecopy.h>
 #include <ulmblas/impl/level3/ukernel/ugemm.h>
@@ -64,8 +63,8 @@ utrlsm(IndexType    mr,
        IndexType    incRowC,
        IndexType    incColC)
 {
-    const IndexType MR = BlockSizeUGemm<T>::MR;
-    const IndexType NR = BlockSizeUGemm<T>::NR;
+    const IndexType MR = BlockSize<T>::MR;
+    const IndexType NR = BlockSize<T>::NR;
 
     T   A_[MR*MR];
     T   B_[MR*NR];
@@ -93,8 +92,8 @@ utrlsm(const T     *A,
        IndexType   incRowC,
        IndexType   incColC)
 {
-    const IndexType MR = BlockSizeUGemm<T>::MR;
-    const IndexType NR = BlockSizeUGemm<T>::NR;
+    const IndexType MR = BlockSize<T>::MR;
+    const IndexType NR = BlockSize<T>::NR;
 
     utrlsm(MR, NR, A, B, C, incRowC, incColC);
 }

@@ -36,6 +36,7 @@
 #include <ulmblas/impl/auxiliary/conjugate.h>
 #include <ulmblas/impl/auxiliary/imag.h>
 #include <ulmblas/impl/auxiliary/isaligned.h>
+#include <ulmblas/impl/auxiliary/malloc_aligned.h>
 #include <ulmblas/impl/auxiliary/memorypool.h>
 #include <ulmblas/impl/auxiliary/printmatrix.h>
 #include <ulmblas/impl/auxiliary/real.h>

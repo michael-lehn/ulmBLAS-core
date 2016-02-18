@@ -36,8 +36,11 @@
 namespace ulmBLAS { namespace sse {
 
 template <typename IndexType>
-static typename std::enable_if<std::is_convertible<IndexType,long>::value,
-void>::type
+typename std::enable_if<std::is_convertible<IndexType, std::int64_t>::value
+                     && BlockSize<double>::MR==4
+                     && BlockSize<double>::NR==4
+                     && BlockSize<double>::align==16,
+             void>::type
 ugemm(IndexType      kc,
       const double   &alpha,
       const double   *A,
@@ -49,10 +52,10 @@ ugemm(IndexType      kc,
       const double   *nextA,
       const double   *nextB)
 {
-    long kb      = kc / 4;
-    long kl      = kc % 4;
-    long incRowC = incRowC_;
-    long incColC = incColC_;
+    std::int64_t kb      = kc / 4;
+    std::int64_t kl      = kc % 4;
+    std::int64_t incRowC = incRowC_;
+    std::int64_t incColC = incColC_;
 
     __asm__ volatile
     (
