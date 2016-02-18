@@ -49,7 +49,7 @@ geraxpy(IndexType      m,
         IndexType      incRowY,
         IndexType      incColY)
 {
-    assert(alpha_!=Alphe(0));
+    assert(alpha_!=Alpha(0));
     const IndexType    UnitStride(1);
     const Alpha        alpha = Alpha(1)/alpha_;
 
@@ -99,7 +99,7 @@ geracxpy(IndexType      m,
          IndexType      incRowY,
          IndexType      incColY)
 {
-    assert(alpha_!=Alphe(0));
+    assert(alpha_!=Alpha(0));
     const IndexType    UnitStride(1);
     const Alpha        alpha = Alpha(1)/alpha_;
 
