@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014, The University of Texas at Austin
+ * Copyright (C) 2014-2015, Michael Lehn
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -27,15 +28,6 @@
  *
  */
 
-/*
- * Copyright (C) 2014-2015, Michael Lehn
- *
- * ulmBLAS adopted general ideas from BLIS.  Using micro kernels from BLIS
- * only requires minor modifications,
- *
- */
-
-#ifndef ULMBLAS_IMPL_AUXILIARY_ABS1_H
 #define ULMBLAS_IMPL_AUXILIARY_ABS1_H 1
 
 #include <complex>
