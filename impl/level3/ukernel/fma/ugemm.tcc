@@ -1170,7 +1170,7 @@ ugemm(Index kc, double alpha,
       "m" (k_iter), // 0
       "m" (k_left), // 1
       "m" (A),      // 2
-      "m" (A),      // 3
+      "m" (B),      // 3
       "m" (pAlpha),  // 4
       "m" (pBeta),   // 5
       "m" (C),      // 6
