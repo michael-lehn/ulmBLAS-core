@@ -28,6 +28,7 @@
  *
  */
 
+#ifndef ULMBLAS_IMPL_AUXILIARY_ABS1_H 1
 #define ULMBLAS_IMPL_AUXILIARY_ABS1_H 1
 
 #include <complex>
