@@ -1171,8 +1171,8 @@ ugemm(Index kc, double alpha,
       "m" (k_left), // 1
       "m" (A),      // 2
       "m" (A),      // 3
-      "m" (alpha),  // 4
-      "m" (beta),   // 5
+      "m" (pAlpha),  // 4
+      "m" (pBeta),   // 5
       "m" (C),      // 6
       "m" (rs_c),   // 7
       "m" (cs_c)    // 8

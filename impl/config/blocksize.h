@@ -72,7 +72,7 @@ namespace ulmBLAS {
 #   define BS_DEFAULT_MR_S          16
 #   define BS_DEFAULT_NR_S          6
 
-#   ifdef USE_4_12
+#   ifndef USE_4_12
 #      define BS_DEFAULT_MC_D       72
 #      define BS_DEFAULT_KC_D       256
 #      define BS_DEFAULT_NC_D       4080
