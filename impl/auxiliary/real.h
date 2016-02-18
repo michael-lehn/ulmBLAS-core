@@ -1,4 +1,5 @@
 /*
+ * Copyright (C) 2014-2015, Michael Lehn
  * Copyright (C) 2014, The University of Texas at Austin
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,14 +25,6 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- */
-
-/*
- * Copyright (C) 2014-2015, Michael Lehn
- *
- * ulmBLAS adopted general ideas from BLIS.  Using micro kernels from BLIS
- * only requires minor modifications,
  *
  */
 
