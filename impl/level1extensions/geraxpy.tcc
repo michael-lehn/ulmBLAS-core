@@ -39,15 +39,15 @@ namespace ulmBLAS {
 
 template <typename IndexType, typename Alpha, typename MX, typename MY>
 void
-geaxpy(IndexType      m,
-       IndexType      n,
-       const Alpha    &alpha_,
-       const MX       *X,
-       IndexType      incRowX,
-       IndexType      incColX,
-       MY             *Y,
-       IndexType      incRowY,
-       IndexType      incColY)
+geraxpy(IndexType      m,
+        IndexType      n,
+        const Alpha    &alpha_,
+        const MX       *X,
+        IndexType      incRowX,
+        IndexType      incColX,
+        MY             *Y,
+        IndexType      incRowY,
+        IndexType      incColY)
 {
     assert(alpha_!=Alphe(0));
     const IndexType    UnitStride(1);
@@ -89,15 +89,15 @@ geaxpy(IndexType      m,
 
 template <typename IndexType, typename Alpha, typename MX, typename MY>
 void
-geacxpy(IndexType      m,
-        IndexType      n,
-        const Alpha    &alpha_,
-        const MX       *X,
-        IndexType      incRowX,
-        IndexType      incColX,
-        MY             *Y,
-        IndexType      incRowY,
-        IndexType      incColY)
+geracxpy(IndexType      m,
+         IndexType      n,
+         const Alpha    &alpha_,
+         const MX       *X,
+         IndexType      incRowX,
+         IndexType      incColX,
+         MY             *Y,
+         IndexType      incRowY,
+         IndexType      incColY)
 {
     assert(alpha_!=Alphe(0));
     const IndexType    UnitStride(1);
