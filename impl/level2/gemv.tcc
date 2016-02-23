@@ -89,7 +89,7 @@ gemv(IndexType    m,
     if (homogeneousTypes && incRowA==UnitStride) {
         if (!conjA) {
             const IndexType bf = FuseFactor<T>::axpyf;
-            const IndexType nb = (n/bf)*bf;
+            const IndexType nb = (bf>1) ? (n/bf)*bf : 0;
 
             for (IndexType j=0; j<nb; j+=bf) {
                 axpyf(m, alpha, &x[j*incX], incX,
@@ -101,7 +101,7 @@ gemv(IndexType    m,
             }
         } else {
             const IndexType bf = FuseFactor<T>::acxpyf;
-            const IndexType nb = (n/bf)*bf;
+            const IndexType nb = (bf>1) ? (n/bf)*bf : 0;
 
             for (IndexType j=0; j<nb; j+=bf) {
                 acxpyf(m, alpha, &x[j*incX], incX,
@@ -119,7 +119,7 @@ gemv(IndexType    m,
     } else if (homogeneousTypes && incColA==UnitStride) {
         if (!conjA) {
             const IndexType bf = FuseFactor<T>::dotuxf;
-            const IndexType mb = (m/bf)*bf;
+            const IndexType mb = (bf>1) ? (m/bf)*bf : 0;
 
             TY tmp[bf];
 
@@ -137,7 +137,7 @@ gemv(IndexType    m,
             }
         } else {
             const IndexType bf = FuseFactor<T>::dotcxf;
-            const IndexType mb = (m/bf)*bf;
+            const IndexType mb = (bf>1) ? (m/bf)*bf : 0;
 
             TY tmp[bf];
 

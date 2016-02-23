@@ -31,15 +31,19 @@
 #ifndef ULMBLAS_IMPL_LEVEL3_UKERNEL_REF_UTRLSM_H
 #define ULMBLAS_IMPL_LEVEL3_UKERNEL_REF_UTRLSM_H 1
 
+#include <type_traits>
+
 namespace ulmBLAS { namespace ref {
 
-template <typename IndexType, typename T>
-    void
-    utrlsm(const T     *A,
-           const T     *B,
-           T           *C,
-           IndexType   incRowC,
-           IndexType   incColC);
+template <typename T>
+    typename std::enable_if<BlockSize<T>::vlen == 0,
+             void>::type
+    utrlsm(const T *A, T *B);
+
+template <typename T>
+    typename std::enable_if<BlockSize<T>::vlen != 0,
+             void>::type
+    utrlsm(const T *A, T *B);
 
 } } // namespace ref, ulmBLAS
 

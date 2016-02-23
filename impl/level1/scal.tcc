@@ -31,6 +31,7 @@
 #ifndef ULMBLAS_IMPL_LEVEL1_SCAL_TCC
 #define ULMBLAS_IMPL_LEVEL1_SCAL_TCC 1
 
+#include <complex>
 #include <ulmblas/impl/level1/scal.h>
 
 namespace ulmBLAS {
@@ -49,6 +50,35 @@ scal(IndexType      n,
     } else if (alpha==Alpha(0)) {
         for (IndexType i=0; i<n; ++i) {
             x[i*incX] = Alpha(0);
+        }
+    }
+}
+
+template <typename IndexType, typename Alpha, typename VX>
+void
+scal(IndexType                  n,
+     const std::complex<Alpha>  &alpha,
+     std::complex<VX>           *x,
+     IndexType                  incX)
+{
+    Alpha     ra = alpha.real();
+    Alpha     ia = alpha.imag();
+
+    VX       *rx = reinterpret_cast<VX *>(x);
+    VX       *ix = rx + 1;
+
+    incX *= 2;
+
+    if (alpha!=Alpha(1) && alpha!=Alpha(0)) {
+        for (IndexType i=0; i<n; ++i) {
+            VX real    = ra*rx[i*incX] - ia*ix[i*incX];
+            ix[i*incX] = ra*ix[i*incX] + ia*rx[i*incX];
+            rx[i*incX] = real;
+        }
+    } else if (alpha==Alpha(0)) {
+        for (IndexType i=0; i<n; ++i) {
+            rx[i*incX] = Alpha(0);
+            ix[i*incX] = Alpha(0);
         }
     }
 }

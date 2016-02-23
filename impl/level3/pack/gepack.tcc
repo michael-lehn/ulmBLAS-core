@@ -38,36 +38,6 @@
 namespace ulmBLAS {
 
 template <typename IndexType, typename TA, typename Buffer>
-static void
-pack_MRxk(IndexType   k,
-          bool        conj,
-          const TA    *A,
-          IndexType   incRowA,
-          IndexType   incColA,
-          Buffer      *buffer)
-{
-    const IndexType MR = BlockSize<Buffer>::MR;
-
-    if (!conj) {
-        for (IndexType j=0; j<k; ++j) {
-            for (IndexType i=0; i<MR; ++i) {
-                buffer[i] = A[i*incRowA];
-            }
-            buffer += MR;
-            A      += incColA;
-        }
-    } else {
-        for (IndexType j=0; j<k; ++j) {
-            for (IndexType i=0; i<MR; ++i) {
-                buffer[i] = conjugate(A[i*incRowA]);
-            }
-            buffer += MR;
-            A      += incColA;
-        }
-    }
-}
-
-template <typename IndexType, typename TA, typename Buffer>
 void
 gepack_A(IndexType   mc,
          IndexType   kc,
@@ -75,57 +45,19 @@ gepack_A(IndexType   mc,
          const TA    *A,
          IndexType   incRowA,
          IndexType   incColA,
-         Buffer      *buffer)
+         Buffer      *p)
 {
-    const IndexType MR  = BlockSize<Buffer>::MR;
-    const IndexType mp  = mc / MR;
-    const IndexType mr_ = mc % MR;
+    IndexType MR = BlockSize<Buffer>::MR;
+    IndexType mp = (mc+MR-1) / MR;
 
-    for (IndexType i=0; i<mp; ++i) {
-        pack_MRxk(kc, conj, A, incRowA, incColA, buffer);
-        buffer += kc*MR;
-        A      += MR*incRowA;
-    }
-    if (mr_>0) {
-        for (IndexType j=0; j<kc; ++j) {
-            for (IndexType i=0; i<mr_; ++i) {
-                buffer[i] = (!conj) ? A[i*incRowA] : conjugate(A[i*incRowA]);
+    for (IndexType j=0; j<kc; ++j) {
+        for (IndexType l=0; l<mp; ++l) {
+            for (IndexType i0=0; i0<MR; ++i0) {
+                IndexType i  = l*MR + i0;
+                IndexType nu = l*MR*kc + j*MR + i0;
+                p[nu]        = (i<mc) ? conjugate(A[i*incRowA+j*incColA],conj)
+                                      : Buffer(0);
             }
-            for (IndexType i=mr_; i<MR; ++i) {
-                buffer[i] = Buffer(0);
-            }
-            buffer += MR;
-            A      += incColA;
-        }
-    }
-}
-
-template <typename IndexType, typename TB, typename Buffer>
-static void
-pack_kxNR(IndexType   k,
-          bool        conj,
-          const TB    *B,
-          IndexType   incRowB,
-          IndexType   incColB,
-          Buffer      *buffer)
-{
-    const IndexType NR = BlockSize<Buffer>::NR;
-
-    if (!conj) {
-        for (IndexType i=0; i<k; ++i) {
-            for (IndexType j=0; j<NR; ++j) {
-                buffer[j] = B[j*incColB];
-            }
-            buffer += NR;
-            B      += incRowB;
-        }
-    } else {
-        for (IndexType i=0; i<k; ++i) {
-            for (IndexType j=0; j<NR; ++j) {
-                buffer[j] = conjugate(B[j*incColB]);
-            }
-            buffer += NR;
-            B      += incRowB;
         }
     }
 }
@@ -138,30 +70,49 @@ gepack_B(IndexType   kc,
          const TB    *B,
          IndexType   incRowB,
          IndexType   incColB,
-         Buffer      *buffer)
+         Buffer      *p)
 {
-    const IndexType NR  = BlockSize<Buffer>::NR;
-    const IndexType np  = nc / NR;
-    const IndexType nr_ = nc % NR;
+    const IndexType NR = BlockSize<Buffer>::NR;
+    const IndexType np = (nc+NR-1) / NR;
 
-    for (IndexType j=0; j<np; ++j) {
-        pack_kxNR(kc, conj, B, incRowB, incColB, buffer);
-        buffer += kc*NR;
-        B      += NR*incColB;
-    }
-    if (nr_>0) {
+    for (IndexType l=0; l<np; ++l) {
         for (IndexType i=0; i<kc; ++i) {
-            for (IndexType j=0; j<nr_; ++j) {
-                buffer[j] = (!conj) ? B[j*incColB] : conjugate(B[j*incColB]);
+            for (IndexType j0=0; j0<NR; ++j0) {
+                IndexType j  = l*NR+j0;
+                IndexType nu = l*NR*kc + i*NR + j0;
+                p[nu]        = (j<nc) ? conjugate(B[i*incRowB+j*incColB],conj)
+                                      : Buffer(0);
             }
-            for (IndexType j=nr_; j<NR; ++j) {
-                buffer[j] = Buffer(0);
-            }
-            buffer += NR;
-            B      += incRowB;
         }
     }
 }
+
+template <typename IndexType, typename Buffer, typename TB>
+void
+geunpack_B(IndexType    kc,
+           IndexType    nc,
+           bool         conj,
+           const Buffer *p,
+           TB           *B,
+           IndexType    incRowB,
+           IndexType    incColB)
+{
+    IndexType NR = BlockSize<Buffer>::NR;
+    IndexType np = (nc+NR-1) / NR;
+
+    for (IndexType l=0; l<np; ++l) {
+        for (IndexType i=0; i<kc; ++i) {
+            for (IndexType j0=0; j0<NR; ++j0) {
+                IndexType j  = l*NR+j0;
+                IndexType nu = l*NR*kc + i*NR + j0;
+                if (j<nc) {
+                    B[i*incRowB+j*incColB] = p[nu];
+                }
+            }
+        }
+    }
+}
+
 
 } // namespace ulmBLAS
 

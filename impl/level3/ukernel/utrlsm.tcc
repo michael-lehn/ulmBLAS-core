@@ -36,81 +36,19 @@
 #include <ulmblas/impl/level3/ukernel/ugemm.h>
 #include <ulmblas/impl/level3/ukernel/utrlsm.h>
 
-//
-//  Selected optimized micro kernel
-//
-#if defined(USE_SSE)
-#   define  SELECT_UTRLSM_KERNEL    sse
-#   include <ulmblas/impl/level3/ukernel/sse/utrlsm.h>
-#else
-#   define  SELECT_UTRLSM_KERNEL    ref
-#   include <ulmblas/impl/level3/ukernel/ref/utrlsm.h>
-#endif
+#include <ulmblas/impl/level3/ukernel/ref/utrlsm.h>
 
 
 namespace ulmBLAS {
 
-//
-//  Buffered variant.  Used for zero padded panels.
-//
-template <typename IndexType, typename T, typename TC>
-void
-utrlsm(IndexType    mr,
-       IndexType    nr,
-       const T      *A,
-       const T      *B,
-       TC           *C,
-       IndexType    incRowC,
-       IndexType    incColC)
-{
-    const IndexType MR = BlockSize<T>::MR;
-    const IndexType NR = BlockSize<T>::NR;
-
-    T   A_[MR*MR];
-    T   B_[MR*NR];
-    T   C_[MR*NR];
-
-    scal(MR*MR, T(0), A_, IndexType(1));
-    scal(MR*NR, T(0), B_, IndexType(1));
-
-    gecopy(mr, mr, false, A, IndexType(1), MR, A_, IndexType(1), MR);
-    gecopy(mr, nr, false, B, NR, IndexType(1), B_, NR, IndexType(1));
-
-    utrlsm(A_, B_, C_, IndexType(1), MR);
-    gecopy(mr, nr, false, C_, IndexType(1), MR, C, incRowC, incColC);
-}
-
-//
-//  Buffered variant.  Used if the result A^(-1)*B needs to be upcasted for
-//  computing C <- A^(-1)*B
-//
-template <typename T, typename TC, typename IndexType>
+template <typename T>
 void
 utrlsm(const T     *A,
-       const T     *B,
-       TC          *C,
-       IndexType   incRowC,
-       IndexType   incColC)
+       T           *B)
 {
-    const IndexType MR = BlockSize<T>::MR;
-    const IndexType NR = BlockSize<T>::NR;
-
-    utrlsm(MR, NR, A, B, C, incRowC, incColC);
+    ref::utrlsm(A, B);
 }
 
-//
-//  Unbuffered variant.
-//
-template <typename IndexType, typename T>
-void
-utrlsm(const T     *A,
-       const T     *B,
-       T           *C,
-       IndexType   incRowC,
-       IndexType   incColC)
-{
-    SELECT_UTRLSM_KERNEL::utrlsm(A, B, C, incRowC, incColC);
-}
 
 } // namespace ulmBLAS
 

@@ -1,6 +1,10 @@
 #ifndef ULMBLAS_CXXBLAS_LEVEL3_GEMM_H
 #define ULMBLAS_CXXBLAS_LEVEL3_GEMM_H 1
 
+#ifdef USE_EXTERNAL_BLAS
+#include <ulmblas/external/blis/gemm.h>
+#endif // USE_EXTERNAL_BLAS
+
 namespace cxxblas {
 
 template <typename IndexType, typename Alpha, typename TA, typename TB,

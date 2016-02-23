@@ -1,6 +1,10 @@
 #ifndef ULMBLAS_CXXBLAS_LEVEL2_GERU_H
 #define ULMBLAS_CXXBLAS_LEVEL2_GERU_H 1
 
+#ifdef USE_EXTERNAL_BLAS
+#include <ulmblas/external/blis/geru.h>
+#endif // USE_EXTERNAL_BLAS
+
 namespace cxxblas {
 
 template <typename IndexType, typename Alpha, typename TX, typename TY,

@@ -69,7 +69,6 @@
 #include <ulmblas/impl/level3/ukernel/ref/utrlsm.h>
 #include <ulmblas/impl/level3/ukernel/ref/utrusm.h>
 #include <ulmblas/impl/level3/ukernel/sse/ugemm.h>
-#include <ulmblas/impl/level3/ukernel/sse/utrlsm.h>
 #include <ulmblas/impl/level3/ukernel/sse/utrusm.h>
 #include <ulmblas/impl/level3/ukernel/ugemm.h>
 #include <ulmblas/impl/level3/ukernel/usylrk.h>

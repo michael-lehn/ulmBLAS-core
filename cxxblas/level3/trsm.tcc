@@ -2,7 +2,6 @@
 #define ULMBLAS_CXXBLAS_LEVEL3_TRSM_TCC 1
 
 #include <ulmblas/cxxblas/level3/trmm.h>
-#include <ulmblas/external.h>
 #include <ulmblas/ulmblas.h>
 
 namespace cxxblas {

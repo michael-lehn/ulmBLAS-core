@@ -93,17 +93,15 @@ trlsm(IndexType    m,
                      &B[i*MC*incRowB+j*NC*incColB], incRowB, incColB,
                      B_);
 
-            //std::cerr << "-- trlsm ----------" << std::endl;
-            //printMatrix(mc, mc, &A[i*MC*(incRowA+incColA)], incRowA, incColA);
-
             trlspack(mc, conjA, unitDiag,
                      &A[i*MC*(incRowA+incColA)], incRowA, incColA,
                      A_);
 
-            //printMatrix(MR, (MC*MC/MR), A_, 1, MR);
+            mtrlsm(mc, nc, T(alpha_), A_, B_);
 
-            mtrlsm(mc, nc, T(alpha_), A_, B_,
-                   &B[i*MC*incRowB+j*NC*incColB], incRowB, incColB);
+            geunpack_B(mc, nc, false,
+                       B_,
+                       &B[i*MC*incRowB+j*NC*incColB], incRowB, incColB);
 
             for (IndexType l=i+1; l<mb; ++l) {
                 mc  = (l!=mb-1 || mc_==0) ? MC : mc_;

@@ -37,48 +37,8 @@
 
 namespace ulmBLAS {
 
-template <typename IndexType, typename TL, typename Buffer>
-static void
-trlspack_MRxk(IndexType   k,
-              bool        conj,
-              bool        unit,
-              const TL    *L,
-              IndexType   incRowL,
-              IndexType   incColL,
-              Buffer      *buffer)
-{
-    const IndexType MR  = BlockSize<Buffer>::MR;
 
-    if (!conj) {
-        for (IndexType j=0; j<k-MR; ++j) {
-            for (IndexType i=0; i<MR; ++i) {
-                buffer[i] = L[i*incRowL];
-            }
-            buffer += MR;
-            L      += incColL;
-        }
-    } else {
-        for (IndexType j=0; j<k-MR; ++j) {
-            for (IndexType i=0; i<MR; ++i) {
-                buffer[i] = conjugate(L[i*incRowL]);
-            }
-            buffer += MR;
-            L      += incColL;
-        }
-    }
-    for (IndexType j=0; j<MR; ++j) {
-        for (IndexType i=0; i<j; ++i) {
-            buffer[i] = Buffer(0);
-        }
-        buffer[j] = (unit) ? Buffer(1)
-                           : conjugate(Buffer(1)/L[j*incRowL], conj);
-        for (IndexType i=j+1; i<MR; ++i) {
-            buffer[i] = conjugate(L[i*incRowL], conj);
-        }
-        buffer += MR;
-        L      += incColL;
-    }
-}
+
 
 template <typename IndexType, typename TL, typename Buffer>
 void
@@ -88,43 +48,29 @@ trlspack(IndexType   mc,
          const TL    *L,
          IndexType   incRowL,
          IndexType   incColL,
-         Buffer      *buffer)
+         Buffer      *p)
 {
-    const IndexType MR  = BlockSize<Buffer>::MR;
-    const IndexType mp  = mc / MR;
-    const IndexType mr_ = mc % MR;
+    IndexType MR = BlockSize<Buffer>::MR;
+    IndexType mp = (mc+MR-1) / MR;
 
-    for (IndexType i=0; i<mp; ++i) {
-        trlspack_MRxk((i+1)*MR, conj, unit, L, incRowL, incColL, buffer);
-        buffer += (i+1)*MR*MR;
-        L      += MR*incRowL;
-    }
-
-    if (mr_>0) {
-        for (IndexType j=0; j<mp*MR; ++j) {
-            for (IndexType i=0; i<mr_; ++i) {
-                buffer[i] = conjugate(L[i*incRowL], conj);
+    for (IndexType j=0; j<mp; ++j) {
+        for (IndexType j0=0; j0<MR; ++j0) {
+            for (IndexType i=j; i<mp; ++i) {
+                for (IndexType i0=0; i0<MR; ++i0) {
+                    IndexType I  = i*MR+i0;
+                    IndexType J  = j*MR+j0;
+                    IndexType nu = (i+1)*i/2*MR*MR + j*MR*MR + j0*MR +i0;
+                    p[nu] = (I==J && unit)
+                            ? Buffer(1)
+                          : (I==J && !unit)
+                            ? Buffer(1)/conjugate(L[I*(incRowL+incColL)],conj)
+                          : (I>=mc || J>=mc)
+                            ? Buffer(0)
+                          : (I>J)
+                            ? conjugate(L[I*incRowL+J*incColL],conj)
+                          : Buffer(0);
+                }
             }
-            for (IndexType i=mr_; i<MR; ++i) {
-                buffer[i] = Buffer(0);
-            }
-            buffer += MR;
-            L      += incColL;
-        }
-        for (IndexType j=0; j<mr_; ++j) {
-            for (IndexType i=0; i<j; ++i) {
-                buffer[i] = Buffer(0);
-            }
-            buffer[j] = (unit) ? Buffer(1)
-                               : conjugate(Buffer(1)/L[j*incRowL], conj);
-            for (IndexType i=j+1; i<mr_; ++i) {
-                buffer[i] = conjugate(L[i*incRowL], conj);
-            }
-            for (IndexType i=mr_; i<MR; ++i) {
-                buffer[i] = Buffer(0);
-            }
-            buffer += MR;
-            L      += incColL;
         }
     }
 }

@@ -109,7 +109,7 @@ namespace ulmBLAS {
 #   define BS_DEFAULT_MR_S          8
 #   define BS_DEFAULT_NR_S          8
 
-#   define BS_DEFAULT_MC_D          96
+#   define BS_DEFAULT_MC_D          2*96
 #   define BS_DEFAULT_KC_D          256
 #   define BS_DEFAULT_NC_D          4096
 #   define BS_DEFAULT_MR_D          4
@@ -211,7 +211,7 @@ struct BlockSize
     static const int MR = std::is_same<S, T>::value ? BS_DEFAULT_MR_S
                         : std::is_same<D, T>::value ? BS_DEFAULT_MR_D
                         : std::is_same<C, T>::value ? BS_DEFAULT_MR_C
-                        : std::is_same<D, T>::value ? BS_DEFAULT_MR_Z
+                        : std::is_same<Z, T>::value ? BS_DEFAULT_MR_Z
                         : 2;
 
     static const int NR = std::is_same<S, T>::value ? BS_DEFAULT_NR_S

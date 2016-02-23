@@ -73,14 +73,14 @@ struct FuseFactor
     typedef std::complex<float>   fcomplex;
     typedef std::complex<double>  dcomplex;
 
-    static const int axpyf = std::is_same<T,double>::value   ? 2
-                           : std::is_same<T,dcomplex>::value ? 4
+    static const int axpyf = std::is_same<T,double>::value   ? 8
+                           : std::is_same<T,dcomplex>::value ? 1
                            : 1;
 
     static const int acxpyf = axpyf;
 
     static const int dotuxf = std::is_same<T,double>::value ? 4
-                           : std::is_same<T,dcomplex>::value? 4
+                           : std::is_same<T,dcomplex>::value? 1
                            : 1;
     static const int dotcxf = dotuxf;
 
@@ -96,15 +96,20 @@ struct FuseFactor
     typedef std::complex<double>  dcomplex;
 
     static const int axpyf = std::is_same<T,double>::value   ? 4
-                           : std::is_same<T,dcomplex>::value ? 4
+                           : std::is_same<T,float>::value    ? 4
+                           : std::is_same<T,dcomplex>::value ? 1
+                           : std::is_same<T,fcomplex>::value ? 1
                            : 1;
 
     static const int acxpyf = axpyf;
 
     static const int dotuxf = std::is_same<T,double>::value   ? 4
-                            : std::is_same<T,dcomplex>::value ? 4
+                            : std::is_same<T,float>::value    ? 4
+                            : std::is_same<T,dcomplex>::value ? 1
+                            : std::is_same<T,fcomplex>::value ? 1
                             : 1;
 
+    static const int dotcxf = dotuxf;
     static const int dotxaxpyf = axpyf;
 };
 

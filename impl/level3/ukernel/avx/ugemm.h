@@ -36,7 +36,7 @@
 
 namespace ulmBLAS { namespace avx {
 
-using ref::ugemm;
+//using ref::ugemm;
 
 template <typename Index>
 typename std::enable_if<std::is_convertible<Index, std::int64_t>::value
